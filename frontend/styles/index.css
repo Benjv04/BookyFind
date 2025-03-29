@@ -1,0 +1,175 @@
+body {
+    font-family: Arial, sans-serif;  /* Establece Arial como fuente principal con sans-serif como fallback */
+    background-color: #f8f9fa;  /* Color de fondo gris claro */
+    margin: 0;  /* Elimina márgenes por defecto */
+    padding: 0;  /* Elimina padding por defecto */
+}
+
+/*MENU*/
+
+.container-menu {
+    background-color: #ffffff;  /* Fondo blanco para el menú */
+    padding: 15px 0;  /* 15px de padding arriba/abajo, 0 en los lados */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  /* Sombra sutil debajo del menú */
+}
+
+.menu {
+    display: flex;  /* Usa flexbox para el layout */
+    justify-content: space-between;  /* Distribuye el espacio entre elementos */
+    align-items: center;  /* Centra verticalmente los elementos */
+    max-width: 1200px;  /* Ancho máximo del contenedor */
+    margin: 0 auto;  /* Centra el contenedor horizontalmente */
+}
+
+.titulo-tienda {
+    font-size: 24px;  /* Tamaño de fuente */
+    font-weight: bold;  /* Texto en negrita */
+    color: #333;  /* Color de texto gris oscuro */
+    margin: 0;  /* Elimina margen por defecto */
+}
+
+/*NAVEGACION*/
+
+.nav {
+    display: flex;  /* Disposición en fila de los items */
+    list-style: none;  /* Elimina los bullets de la lista */
+    padding: 0;  /* Elimina padding por defecto */
+    margin: 0;  /* Elimina margen por defecto */
+}
+
+.nav-item {
+    margin-right: 15px;  /* Espacio entre items de navegación */
+}
+
+.nav-link {
+    text-decoration: none;  /* Elimina subrayado de los links */
+    color: #333;  /* Color de texto gris oscuro */
+    font-size: 16px;  /* Tamaño de fuente */
+    transition: color 0.3s;  /* Transición suave para el cambio de color */
+}
+
+.nav-link:hover {
+    color: #007bff;  /* Color azul al hacer hover */
+}
+
+/*BUSCADOR*/
+
+.container-buscador {
+    display: flex;  /* Disposición en fila */
+    align-items: center;  /* Centra verticalmente los elementos */
+}
+
+.buscador {
+    padding: 5px;  /* Padding interno */
+    border: 1px solid #ccc;  /* Borde gris claro */
+    border-radius: 4px;  /* Esquinas redondeadas */
+    outline: none;  /* Elimina el outline al enfocar */
+}
+
+.btn {
+    margin-left: 5px;  /* Espacio a la izquierda del botón */
+    background-color: white;  /* Color de fondo azul */
+    border: none;  /* Sin borde */
+    padding: 5px 10px;  /* Padding interno */
+    cursor: pointer;  /* Cursor tipo pointer al pasar el mouse */
+    border-radius: 4px;  /* Esquinas redondeadas */
+}
+
+.btn:hover {
+    background-color: #0056b3;  /* Color azul más oscuro al hacer hover */
+}
+
+/*BANNER*/
+
+.container-banner {
+    text-align: center;  /* Centra el contenido */
+    margin: 20px 0;  /* Margen arriba/abajo */
+}
+
+.container-banner img {
+    max-width: 100%;  /* La imagen no excede el ancho del contenedor */
+    height: auto;  /* Altura automática para mantener proporciones */
+}
+
+/*MAS VENDIDOS*/
+
+.container-vendidos {
+    max-width: 1200px;  /* Ancho máximo */
+    margin: 0 auto;  /* Centrado horizontal */
+    padding: 20px;  /* Espaciado interno */
+}
+
+.text-center {
+    text-align: center;  /* Texto centrado */
+    margin-bottom: 20px;  /* Margen inferior */
+    font-size: 22px;  /* Tamaño de fuente */
+    font-weight: bold;  /* Texto en negrita */
+    color: #333;  /* Color de texto gris oscuro */
+}
+
+.row-vendidos {
+    display: flex;  /* Disposición en fila */
+    justify-content: center;  /* Centra los elementos horizontalmente */
+    gap: 20px;  /* Espacio entre elementos */
+}
+
+.col-md-6 {
+    flex: 1;  /* Los elementos crecen para llenar el espacio */
+    max-width: 300px;  /* Ancho máximo de cada tarjeta */
+}
+
+.card {
+    border: 1px solid #ddd;  /* Borde gris claro */
+    border-radius: 8px;  /* Esquinas más redondeadas */
+    overflow: hidden;  /* Evita que el contenido sobresalga */
+    text-align: center;  /* Texto centrado */
+    background-color: #fff;  /* Fondo blanco */
+    transition: transform 0.3s;  /* Transición suave para la transformación */
+}
+
+.card:hover {
+    transform: scale(1.05);  /* Efecto de zoom al hacer hover */
+}
+
+.card-img-top {
+    width: 100%;  /* Ancho completo del contenedor */
+    height: auto;  /* Altura automática */
+}
+
+.card-body {
+    padding: 10px;  /* Espaciado interno */
+}
+
+.card-text {
+    font-size: 16px;  /* Tamaño de fuente */
+    color: #333;  /* Color de texto gris oscuro */
+    font-weight: bold;  /* Texto en negrita */
+}
+
+
+
+/* Estilos del carrito */
+.container-carrito {
+    margin-left: 15px;
+}
+
+.carrito-btn {
+    position: relative;
+    padding: 8px 12px;
+    border-radius: 50%;
+}
+
+.carrito-contador {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff6b6b;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
