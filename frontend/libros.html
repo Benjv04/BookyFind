@@ -12,28 +12,40 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-    <header class="container-menu">
+
+
+
+ <header class="container-menu">
         <div class="menu">
+            <!-- Checkbox oculto para el menú hamburguesa -->
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+            <label for="menu-toggle" class="menu-hamburguesa">
+                <i class="bi bi-list"></i>
+            </label>
+            
             <h1 class="titulo-tienda">BookyFind</h1>
-            <nav>
-                <ul class="nav">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="libros.html">Libros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="clubes.html">Clubes de Lectura</a></li>
-                    <li class="nav-item"><a class="nav-link" href="ofertas.html">Ofertas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-                </ul>
-            </nav>
-            <div class="container-buscador">
-                <input class="buscador" type="text" placeholder="Buscar en la tienda...">
-                <button class="btn btn-primary">🔍</button>
+            
+            <div class="menu-contenido">
+                <nav>
+                    <ul class="nav">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="libros.html">Libros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="clubes.html">Clubes de Lectura</a></li>
+                        <li class="nav-item"><a class="nav-link" href="ofertas.html">Ofertas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    </ul>
+                </nav>
+                <div class="container-buscador">
+                    <input class="buscador" type="text" placeholder="Buscar en la tienda...">
+                    <button class="btn btn-primary">🔍</button>
+                </div>
+                <div class="container-carrito">
+                    <a href="carrito.html" class="btn btn-outline-primary carrito-btn">
+                        <i class="bi bi-basket-fill"></i>
+                        <span class="carrito-contador">0</span>
+                    </a>
+                </div>
             </div>
-            <div class="container-carrito">
-                <a href="carrito.html" class="btn btn-outline-primary carrito-btn">
-                    <i class="bi bi-basket-fill"></i>
-                    <span class="carrito-contador">0</span>
-                </a>
-            </div> 
         </div>
     </header>
 

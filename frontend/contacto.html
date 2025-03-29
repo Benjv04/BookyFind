@@ -16,33 +16,55 @@
     <!---MENU---->
     <header class="container-menu">
         <div class="menu">
+            <!-- Checkbox oculto para el menú hamburguesa -->
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+            <label for="menu-toggle" class="menu-hamburguesa">
+                <i class="bi bi-list"></i>
+            </label>
+            
             <h1 class="titulo-tienda">BookyFind</h1>
-            <nav>
-                <ul class="nav">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="libros.html">Libros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="clubes.html">Clubes de Lectura</a></li>
-                    <li class="nav-item"><a class="nav-link" href="ofertas.html">Ofertas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-                </ul>
-            </nav>
-            <div class="container-buscador">
-                <input class="buscador" type="text" placeholder="Buscar en la tienda...">
-                <button class="btn btn-primary">🔍</button>
+            
+            <div class="menu-contenido">
+                <nav>
+                    <ul class="nav">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="libros.html">Libros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="clubes.html">Clubes de Lectura</a></li>
+                        <li class="nav-item"><a class="nav-link" href="ofertas.html">Ofertas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    </ul>
+                </nav>
+                <div class="container-buscador">
+                    <input class="buscador" type="text" placeholder="Buscar en la tienda...">
+                    <button class="btn btn-primary">🔍</button>
+                </div>
+                <div class="container-carrito">
+                    <a href="carrito.html" class="btn btn-outline-primary carrito-btn">
+                        <i class="bi bi-basket-fill"></i>
+                        <span class="carrito-contador">0</span>
+                    </a>
+                </div>
             </div>
-            <div class="container-carrito">
-                <a href="carrito.html" class="btn btn-outline-primary carrito-btn">
-                    <i class="bi bi-basket-fill"></i>
-                    <span class="carrito-contador">0</span>
-                </a>
-            </div> 
         </div>
     </header>
 
-    <div class="container-contacto">
-        <h1 class="titulo">Contacto</h1>
-    </div>
 
+    <div class="container-contacto">
+        <div class="container-informacion">
+            <h1 class="titulo-vista">Contacto</h1>
+            <br>
+            <br>
+            <p>Nuestro centro de distribución se encuentra en:</p>
+            <br>
+            <p><strong>Río Refugio 9653, Pudahuel, ENEA</strong></p>
+            <p><strong>tienda.virtual@BookyFind.cl</strong></p>
+            <p><strong>+569 94397512</strong></p>
+        </div>
+
+        <div class="container-mapa">
+            <p>AKI SE PODRIA PONER UNA API DE MAPA</p>
+        </div>
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
