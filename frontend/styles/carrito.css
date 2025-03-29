@@ -1,0 +1,75 @@
+/*MENU*/
+
+.container-menu {
+    background-color: #ffffff;  /* Fondo blanco para el menú */
+    padding: 15px 0;  /* 15px de padding arriba/abajo, 0 en los lados */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  /* Sombra sutil debajo del menú */
+}
+
+.menu {
+    display: flex;  /* Usa flexbox para el layout */
+    justify-content: space-between;  /* Distribuye el espacio entre elementos */
+    align-items: center;  /* Centra verticalmente los elementos */
+    max-width: 1200px;  /* Ancho máximo del contenedor */
+    margin: 0 auto;  /* Centra el contenedor horizontalmente */
+}
+
+.titulo-tienda {
+    font-size: 24px;  /* Tamaño de fuente */
+    font-weight: bold;  /* Texto en negrita */
+    color: #333;  /* Color de texto gris oscuro */
+    margin: 0;  /* Elimina margen por defecto */
+}
+
+/*NAVEGACION*/
+
+.nav {
+    display: flex;  /* Disposición en fila de los items */
+    list-style: none;  /* Elimina los bullets de la lista */
+    padding: 0;  /* Elimina padding por defecto */
+    margin: 0;  /* Elimina margen por defecto */
+}
+
+.nav-item {
+    margin-right: 15px;  /* Espacio entre items de navegación */
+}
+
+.nav-link {
+    text-decoration: none;  /* Elimina subrayado de los links */
+    color: #333;  /* Color de texto gris oscuro */
+    font-size: 16px;  /* Tamaño de fuente */
+    transition: color 0.3s;  /* Transición suave para el cambio de color */
+}
+
+.nav-link:hover {
+    color: #007bff;  /* Color azul al hacer hover */
+}
+
+/*BUSCADOR*/
+
+.container-buscador {
+    display: flex;  /* Disposición en fila */
+    align-items: center;  /* Centra verticalmente los elementos */
+}
+
+.buscador {
+    padding: 5px;  /* Padding interno */
+    border: 1px solid #ccc;  /* Borde gris claro */
+    border-radius: 4px;  /* Esquinas redondeadas */
+    outline: none;  /* Elimina el outline al enfocar */
+}
+
+.btn {
+    margin-left: 5px;  /* Espacio a la izquierda del botón */
+    background-color: white;  /* Color de fondo azul */
+    border: none;  /* Sin borde */
+    padding: 5px 10px;  /* Padding interno */
+    cursor: pointer;  /* Cursor tipo pointer al pasar el mouse */
+    border-radius: 4px;  /* Esquinas redondeadas */
+}
+
+.btn:hover {
+    background-color: #0056b3;  /* Color azul más oscuro al hacer hover */
+}
+
+/*BANNER*/
