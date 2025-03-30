@@ -20,6 +20,15 @@ body {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.container-banner {
+    width: 100%; /* Asegura que ocupe todo el ancho de la página */
+    margin: 0; /* Elimina márgenes */
+    padding: 0; /* Elimina padding */
+    position: relative; /* Asegura que no se superponga con otros elementos */
+    z-index: 1; /* Asegura que esté visible */
+    text-align: center; /* Centra el contenido dentro del contenedor */
+}
+
 .menu-hamburguesa {
     display: none;
     background: none;
