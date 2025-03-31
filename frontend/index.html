@@ -4,44 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookyFind</title>
-    <link rel="stylesheet" href="styles/main.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/index.css">
+    <!-- Bootstrap icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
 
-    <header>
-        <div class="logo">
-            <h1>BookyFind</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Libros</a></li>
-                <li><a href="#">Ebooks</a></li>
-                <li><a href="#">Ofertas</a></li>
-                <li><a href="#">Contacto</a></li>
-            </ul>
-        </nav>
-        <div class="search-bar">
-            <input type="text" placeholder="Buscar en la tienda...">
-            <button>🔍</button>
+    <header class="container-menu">
+        <div class="menu">
+            <h1 class="titulo-tienda">BookyFind</h1>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="libros.html">Libros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="clubes.html">Clubes de Lectura</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ofertas.html">Ofertas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="container-buscador">
+                <input class="buscador" type="text" placeholder="Buscar en la tienda...">
+                <button class="btn btn-primary">🔍</button>
+            </div>
+            <div class="container-carrito">
+                <a href="carrito.html" class="btn btn-outline-primary carrito-btn">
+                    <i class="bi bi-basket-fill"></i>
+                    <span class="carrito-contador">0</span>
+                </a>
+            </div> 
         </div>
     </header>
 
-    <section class="banner">
-        <img src="assets/banner.png" alt="Promoción Especial">
+    <!----BANNER CARRUSEL---->
+    <section id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="assets/banner.png" class="d-block w-100" alt="Promoción Especial 1">
+            </div>
+            <div class="carousel-item">
+                <img src="assets/bannerClubLectura.png" class="d-block w-100" alt="Promoción Especial 2">
+            </div>
+            <div class="carousel-item">
+                <img src="assets/bannerCompraEnLinea.png" class="d-block w-100" alt="Promoción Especial 3">
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
     </section>
 
-    <section class="productos">
-        <h2>Más Vendidos</h2>
-        <div class="producto">
-            <img src="assets/libro1.jpg" alt="Libro 1">
-            <p>Nombre del Libro</p>
-        </div>
-        <div class="producto">
-            <img src="assets/libro2.jpg" alt="Libro 2">
-            <p>Nombre del Libro</p>
-        </div>
-    </section>
+        <!-- Sección de Carrusel -->
+    <div class="container mt-5">
+        <h2 class="text-center"><strong >Más Vendidos</strong></h2>
+        <div id="carouselLibros" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row text-center">
+                        <div class="col-md-3">
+                            <a href="#" class="text-decoration-none text-dark">
+                                <img src="assets/amanecerEnLaCosecha.webp" class="mx-auto d-block w-50" alt="Amanecer en la Cosecha">
+                                <p class="text-center">Amanecer en la Cosecha<br><strong>$23.000</strong></p>
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#" class="text-decoration-none text-dark">
+                                <img src="assets/ELBUZONDELASIMPURAS.webp" class="mx-auto d-block w-50" alt="El Buzón de las Impuras">
+                                <p class="text-center">El Buzón de las Impuras<br><strong>$20.720</strong></p>
+                            </a> 
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#" class="text-decoration-none text-dark">
+                                <img src="assets/portada_alas-de-sangre-empireo.jpg" class="mx-auto d-block w-50" alt="Alas de Sangre">
+                                <p class="text-center">Alas de Sangre<br><strong>$19.920</strong></p>
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#" class="text-decoration-none text-dark">
+                                <img src="assets/portada_habitos-atomicos.jpg" class="mx-auto d-block w-50" alt="Hábitos Atómicos">
+                                <p class="text-center">Hábitos Atómicos<br><strong>$20.720</strong></p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!----
+            <div class="carousel-item">
+                    <div class="row text-center">
+                        <div class="col-md-3">
+                            <a href="#" class="text-decoration-none text-dark">
+                                <img src="assets/corazonDelator.webp" class="mx-auto d-block w-50" alt="El Corazon Delator">
+                                <p class="text-center">El Corazon Delator<br><strong>$15.990</strong></p>
+                            </a> 
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#" class="text-decoration-none text-dark">
+                                <img src="assets/portada_el-libro-troll_elrubius_202411061504.jpg" class="mx-auto d-block w-50" alt="El Libro Troll">
+                                <p class="text-center">El Libro Troll<br><strong>$5.990</strong></p>
+                            </a> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
 
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselLibros" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselLibros" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
