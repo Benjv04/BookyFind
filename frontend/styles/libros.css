@@ -212,3 +212,14 @@
         padding: 8px 15px;
     }
 }
+
+
+.carousel-item img {
+    
+    object-fit: cover;
+}
+
+.carousel-item .row {
+    min-height: 100%;
+    align-items: center; /* Asegura que los elementos estén centrados verticalmente */
+}
