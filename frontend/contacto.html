@@ -56,17 +56,21 @@
             <br>
             <p>Nuestro centro de distribución se encuentra en:</p>
             <br>
-            <p><strong>Río Refugio 9653, Pudahuel, ENEA</strong></p>
+            <p><strong>Av. Vicuña Mackenna, San Joaquín, Región Metropolitana</strong></p>
             <p><strong>tienda.virtual@BookyFind.cl</strong></p>
             <p><strong>+569 94397512</strong></p>
+            <p><strong>+569 76264605</strong></p>
         </div>
 
         <div class="container-mapa">
-            <p>AKI SE PODRIA PONER UNA API DE MAPA</p>
-        </div>
+            <gmp-map center="-33.49986267089844,-70.6161880493164" zoom="14" map-id="DEMO_MAP_ID">
+                <gmp-advanced-marker position="-33.49986267089844,-70.6161880493164" title="My location"></gmp-advanced-marker>
+            </gmp-map>
+        </div>        
     </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwBOLT-BnJWL5xM6mD6gINLIG4PN7ba8M&callback=console.debug&libraries=maps,marker&v=beta"></script>
 </body>
 </html>

@@ -23,7 +23,7 @@ async function translateText(text, targetLang = 'ES') {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                text: [text.substring(0, 500)], 
+                text: [text.substring(0, 500)],
                 target_lang: targetLang
             })
         });
@@ -51,7 +51,7 @@ async function fetchNYTBooks() {
         const data = await response.json();
 
         if (data && data.results && data.results.books) {
-            const books = data.results.books;
+            const books = data.results.books.slice(0, 6); // Muestra solo los primeros 6 libros
             const booksContainer = document.getElementById('nyt-books');
             booksContainer.innerHTML = '';
 
@@ -60,14 +60,14 @@ async function fetchNYTBooks() {
                 const translatedDesc = await translateText(book.description || '');
 
                 const bookCard = `
-                    <div class="col-md-6">
-                        <div class="card">
-                            <img src="${book.book_image}" class="card-img-top" alt="${translatedTitle}">
-                            <div class="card-body">
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="${book.book_image}" class="card-img-top" alt="${book.title}">
+                            <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">${translatedTitle}</h5>
-                                <p class="card-text">Autor: ${book.author}</p>
                                 <p class="card-text">${translatedDesc}</p>
-                                <a href="${book.amazon_product_url}" target="_blank" class="btn btn-primary">Comprar en Amazon</a>
+                                <p class="card-text"><strong>Autor:</strong> ${book.author}</p>
+                                <a href="${book.amazon_product_url}" target="_blank" class="btn btn-primary mt-auto">Comprar en Amazon</a>
                             </div>
                         </div>
                     </div>
@@ -82,5 +82,27 @@ async function fetchNYTBooks() {
     }
 }
 
-// 🔹 Llama a la función al cargar la página
 document.addEventListener('DOMContentLoaded', fetchNYTBooks);
+
+// 🔹 Cálculo del total del carrito
+function updateTotal() {
+    let total = 0;
+    const rows = document.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+        const price = parseFloat(row.querySelector('td:nth-child(2)').textContent.replace('$', '').replace('.', ''));
+        const quantity = parseInt(row.querySelector('.quantity').textContent);
+        total += price * quantity;
+    });
+    document.querySelector('th[colspan="3"] + th').textContent = `$${total.toLocaleString()}`;
+}
+
+// Llama a updateTotal después de cada acción
+increaseButtons.forEach(button => {
+    button.addEventListener('click', updateTotal);
+});
+decreaseButtons.forEach(button => {
+    button.addEventListener('click', updateTotal);
+});
+deleteButtons.forEach(button => {
+    button.addEventListener('click', updateTotal);
+});
