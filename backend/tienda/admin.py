@@ -5,11 +5,14 @@ from .models import Usuario, Libro, Pedido
 class UsuarioAdmin(UserAdmin):
     model = Usuario
     fieldsets = UserAdmin.fieldsets + (
-        ('Información Adicional', {'fields': ('rol', 'nombre', 'email', 'telefono', 'direccion')}),
+        ('Información Adicional', {
+            'fields': ('rol', 'nombre', 'telefono', 'direccion')  # <-- quitamos 'email' aquí
+        }),
     )
     add_fieldsets = (
         (None, {
-            'fields': ('username', 'email', 'password1', 'password2', 'nombre', 'rol', 'telefono', 'direccion')
+            'classes': ('wide',),
+            'fields': ('username', 'email', 'password1', 'password2', 'nombre', 'rol', 'telefono', 'direccion'),
         }),
     )
     list_display = ('username', 'email', 'nombre', 'rol', 'telefono')

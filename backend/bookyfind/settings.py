@@ -56,7 +56,9 @@ ROOT_URLCONF = 'bookyfind.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / '../frontend'],
+        'DIRS': [
+            os.path.join(BASE_DIR.parent, 'frontend'),  
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
