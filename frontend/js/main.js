@@ -36,3 +36,25 @@ async function fetchNYTBooks() {
 }
 
 document.addEventListener('DOMContentLoaded', fetchNYTBooks);
+
+function updateTotal() {
+    let total = 0;
+    const rows = document.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+        const price = parseFloat(row.querySelector('td:nth-child(2)').textContent.replace('$', '').replace('.', ''));
+        const quantity = parseInt(row.querySelector('.quantity').textContent);
+        total += price * quantity;
+    });
+    document.querySelector('th[colspan="3"] + th').textContent = `$${total.toLocaleString()}`;
+}
+
+// Llama a updateTotal después de cada acción
+increaseButtons.forEach(button => {
+    button.addEventListener('click', updateTotal);
+});
+decreaseButtons.forEach(button => {
+    button.addEventListener('click', updateTotal);
+});
+deleteButtons.forEach(button => {
+    button.addEventListener('click', updateTotal);
+});
