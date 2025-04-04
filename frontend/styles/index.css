@@ -1,10 +1,3 @@
-body {
-    font-family: Arial, sans-serif;  /* Establece Arial como fuente principal con sans-serif como fallback */
-    background-color: #f8f9fa;  /* Color de fondo gris claro */
-    margin: 0;  /* Elimina márgenes por defecto */
-    padding: 0;  /* Elimina padding por defecto */
-}
-
 /* MENU TOGGLE */
 .menu-toggle {
     display: none;
@@ -18,15 +11,6 @@ body {
     background-color: #ffffff;
     padding: 15px 0;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.container-banner {
-    width: 100%; /* Asegura que ocupe todo el ancho de la página */
-    margin: 0; /* Elimina márgenes */
-    padding: 0; /* Elimina padding */
-    position: relative; /* Asegura que no se superponga con otros elementos */
-    z-index: 1; /* Asegura que esté visible */
-    text-align: center; /* Centra el contenido dentro del contenedor */
 }
 
 .menu-hamburguesa {
@@ -229,57 +213,23 @@ body {
     }
 }
 
-/*MAS VENDIDOS*/
 
-.container-vendidos {
-    max-width: 1200px;  /* Ancho máximo */
-    margin: 0 auto;  /* Centrado horizontal */
-    padding: 20px;  /* Espaciado interno */
+.carousel-item img {
+    
+    object-fit: cover;
 }
 
-.text-center {
-    text-align: center;  /* Texto centrado */
-    margin-bottom: 20px;  /* Margen inferior */
-    font-size: 22px;  /* Tamaño de fuente */
-    font-weight: bold;  /* Texto en negrita */
-    color: #333;  /* Color de texto gris oscuro */
+.carousel-item .row {
+    min-height: 100%;
+    align-items: center; /* Asegura que los elementos estén centrados verticalmente */
 }
 
-.row-vendidos {
-    display: flex;  /* Disposición en fila */
-    justify-content: center;  /* Centra los elementos horizontalmente */
-    gap: 20px;  /* Espacio entre elementos */
-}
-
-.col-md-6 {
-    flex: 1;  /* Los elementos crecen para llenar el espacio */
-    max-width: 300px;  /* Ancho máximo de cada tarjeta */
-}
-
-.card {
-    border: 1px solid #ddd;  /* Borde gris claro */
-    border-radius: 8px;  /* Esquinas más redondeadas */
-    overflow: hidden;  /* Evita que el contenido sobresalga */
-    text-align: center;  /* Texto centrado */
-    background-color: #fff;  /* Fondo blanco */
-    transition: transform 0.3s;  /* Transición suave para la transformación */
-}
-
-.card:hover {
-    transform: scale(1.05);  /* Efecto de zoom al hacer hover */
-}
-
-.card-img-top {
-    width: 100%;  /* Ancho completo del contenedor */
-    height: auto;  /* Altura automática */
-}
-
-.card-body {
-    padding: 10px;  /* Espaciado interno */
-}
-
-.card-text {
-    font-size: 16px;  /* Tamaño de fuente */
-    color: #333;  /* Color de texto gris oscuro */
-    font-weight: bold;  /* Texto en negrita */
+.carousel-inner {
+    width: 80%; /* Define un ancho del 80% */
+    max-width: 1200px; /* Establece un máximo de 1200px de ancho */
+    margin: 0 auto; /* Centra el contenedor */
+    padding: 20px; /* Agrega algo de espacio alrededor */
+    position: relative;
+    z-index: 1;
+    text-align: center;
 }
