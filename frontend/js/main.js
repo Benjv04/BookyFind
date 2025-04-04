@@ -1,13 +1,16 @@
 const deeplApiKey = '915ad76d-feb6-41c6-a71a-d43874236a92:fx'; // Reemplaza con tu clave real de DeepL
 
-// 🔹 Verifica si la página fue accedida desde un enlace interno
+
+// para que no deje modificar el url que no sean lo base
 document.addEventListener("DOMContentLoaded", function () {
-    const paginasPermitidas = ["/index.html", "/contacto.html", "/libros.html", "/carrito.html", "/clubes.html", "/ofertas.html"];
-    const referrer = document.referrer; // Obtiene la página desde la que llegó el usuario
+    const esLocal = window.location.protocol === "file:";
+    if (esLocal) return; // No aplicar redirección si estás trabajando con archivos locales
+
+    const paginasPermitidas = ["/", "/index.html", "/contacto.html", "/libros.html", "/carrito.html", "/clubes.html", "/ofertas.html"];
     const pathname = window.location.pathname;
 
-    if (!paginasPermitidas.includes(pathname) || (referrer && !referrer.includes(window.location.origin))) {
-        window.location.href = "/index.html"; // Redirige a la página principal
+    if (!paginasPermitidas.includes(pathname)) {
+        window.location.href = "/index.html";
     }
 });
 
