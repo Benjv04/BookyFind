@@ -132,3 +132,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'tienda.Usuario'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+from transbank.webpay.webpay_plus.transaction import Transaction
+
+# Para pruebas (sandbox)
+commerce_code = "597055555532"  # Código de comercio de prueba
+api_key = "597055555532"  # También en pruebas, el mismo
+integration_type = "TEST"
