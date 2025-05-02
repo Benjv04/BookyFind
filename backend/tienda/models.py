@@ -31,11 +31,27 @@ class Libro(models.Model):
         return self.titulo
 
 class Pedido(models.Model):
+    ESTADOS = (
+        ('pending', 'Pendiente'),
+        ('paid', 'Pagado'),
+        ('failed', 'Fallido'),
+    )
+
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     fecha = models.DateTimeField(auto_now_add=True)
     total = models.DecimalField(max_digits=8, decimal_places=2)
     libros = models.ManyToManyField(Libro)
+    estado = models.CharField(max_length=10, choices=ESTADOS, default='pending')
 
     def __str__(self):
         return f'Pedido {self.id} - {self.usuario.username} - {self.fecha.strftime("%d/%m/%Y")}'
-    
+
+class Pago(models.Model):
+    pedido = models.OneToOneField(Pedido, on_delete=models.CASCADE)
+    token = models.CharField(max_length=100)
+    estado = models.CharField(max_length=20)
+    fecha_pago = models.DateTimeField(auto_now_add=True)
+    metodo_pago = models.CharField(max_length=50, default='Webpay Plus')
+
+    def __str__(self):
+        return f"Pago {self.pedido.id} - {self.estado}"
