@@ -39,12 +39,12 @@ async function translateText(text, targetLang = 'ES') {
         const data = await response.json();
         return data.translations[0].text || text;
     } catch (error) {
-        console.error('❌ Error en la traducción con DeepL:', error);
+        console.error(' Error en la traducción con DeepL:', error);
         return text;
     }
 }
 
-// 🔹 API del New York Times
+//  API del New York Times
 const apiKey = 'wJGxjjL9Z1FT7yfO4LeFpbipiAJqE1iP';
 const apiUrl = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${apiKey}`;
 
