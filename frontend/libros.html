@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,54 +8,110 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/libros.css">
+    
+    <link rel="stylesheet" href="{% static 'styles/libros.css' %}">
+    
     <!-- Bootstrap icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
 
+<header class="container-menu">
+    <div class="menu">
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="menu-hamburguesa">
+            <i class="bi bi-list"></i>
+        </label>
+        
+        <h1 class="titulo-tienda">BookyFind</h1>
+        
+        <div class="menu-contenido">
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'libros' %}">Libros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'clubes' %}">Clubes de Lectura</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'ofertas' %}">Ofertas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="container-buscador">
+                <input class="buscador" type="text" placeholder="Buscar en la tienda...">
+                <button class="btn btn-primary">🔍</button>
+            </div>
+            <div class="container-carrito">
+                <a href="{% url 'carrito' %}" class="btn btn-outline-primary carrito-btn">
+                    <i class="bi bi-basket-fill"></i>
+                    <span class="carrito-contador">0</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
 
-
- <header class="container-menu">
-        <div class="menu">
-            <!-- Checkbox oculto para el menú hamburguesa -->
-            <input type="checkbox" id="menu-toggle" class="menu-toggle">
-            <label for="menu-toggle" class="menu-hamburguesa">
-                <i class="bi bi-list"></i>
-            </label>
-            
-            <h1 class="titulo-tienda">BookyFind</h1>
-            
-            <div class="menu-contenido">
-                <nav>
-                    <ul class="nav">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="libros.html">Libros</a></li>
-                        <li class="nav-item"><a class="nav-link" href="clubes.html">Clubes de Lectura</a></li>
-                        <li class="nav-item"><a class="nav-link" href="ofertas.html">Ofertas</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-                    </ul>
-                </nav>
-                <div class="container-buscador">
-                    <input class="buscador" type="text" placeholder="Buscar en la tienda...">
-                    <button class="btn btn-primary">🔍</button>
+<!-- Sección de Carrusel -->
+<div class="container mt-5">
+    <h2 class="titulo text-center"><strong>Nuestra variedad</strong></h2>
+    <br>
+    <div id="carouselLibros" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row text-center">
+                    <div class="col-md-3">
+                        <a href="#" class="text-decoration-none text-dark">
+                            <img src="{% static 'assets/amanecerEnLaCosecha.webp' %}" class="mx-auto d-block w-50" alt="Amanecer en la Cosecha">
+                            <p class="text-center">Amanecer en la Cosecha<br><strong>$23.000</strong></p>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" class="text-decoration-none text-dark">
+                            <img src="{% static 'assets/ELBUZONDELASIMPURAS.webp' %}" class="mx-auto d-block w-50" alt="El Buzón de las Impuras">
+                            <p class="text-center">El Buzón de las Impuras<br><strong>$20.720</strong></p>
+                        </a> 
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" class="text-decoration-none text-dark">
+                            <img src="{% static 'assets/portada_alas-de-sangre-empireo.jpg' %}" class="mx-auto d-block w-50" alt="Alas de Sangre">
+                            <p class="text-center">Alas de Sangre<br><strong>$19.920</strong></p>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" class="text-decoration-none text-dark">
+                            <img src="{% static 'assets/portada_habitos-atomicos.jpg' %}" class="mx-auto d-block w-50" alt="Hábitos Atómicos">
+                            <p class="text-center">Hábitos Atómicos<br><strong>$20.720</strong></p>
+                        </a>
+                    </div>
                 </div>
-                <div class="container-carrito">
-                    <a href="carrito.html" class="btn btn-outline-primary carrito-btn">
-                        <i class="bi bi-basket-fill"></i>
-                        <span class="carrito-contador">0</span>
-                    </a>
+            </div>
+
+            <div class="carousel-item">
+                <div class="row text-center">
+                    <div class="col-md-3">
+                        <a href="#" class="text-decoration-none text-dark">
+                            <img src="{% static 'assets/corazonDelator.webp' %}" class="mx-auto d-block w-50" alt="El Corazon Delator">
+                            <p class="text-center">El Corazon Delator<br><strong>$15.990</strong></p>
+                        </a> 
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" class="text-decoration-none text-dark">
+                            <img src="{% static 'assets/portada_el-libro-troll_elrubius_202411061504.jpg' %}" class="mx-auto d-block w-50" alt="El Libro Troll">
+                            <p class="text-center">El Libro Troll<br><strong>$5.990</strong></p>
+                        </a> 
+                    </div>
                 </div>
             </div>
         </div>
-    </header>
 
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselLibros" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselLibros" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="false"></span>
+        </button>
+    </div>
+</div> 
 
-
-
-
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
