@@ -99,6 +99,53 @@ function updateTotal() {
     document.querySelector('th[colspan="3"] + th').textContent = `$${total.toLocaleString()}`;
 }
 
+
+document.addEventListener('DOMContentLoaded', function () {
+    function actualizarTotal() {
+        let total = 0;
+        const filas = document.querySelectorAll('tbody tr');
+        filas.forEach(fila => {
+            const precioTexto = fila.querySelector('td:nth-child(2)');
+            const cantidadTexto = fila.querySelector('td:nth-child(3) span');
+            if (precioTexto && cantidadTexto) {
+                const precio = parseInt(precioTexto.textContent.replace('$', '').replace('.', ''));
+                const cantidad = parseInt(cantidadTexto.textContent);
+                total += precio * cantidad;
+            }
+        });
+
+        const filaTotal = document.querySelector('tbody tr:last-child th:last-child');
+        filaTotal.textContent = `$${total.toLocaleString('es-CL')}`;
+    }
+
+    document.querySelectorAll('.btn-secondary').forEach(boton => {
+        boton.addEventListener('click', function () {
+            const span = this.parentElement.querySelector('span');
+            let cantidad = parseInt(span.textContent);
+
+            if (this.textContent.trim() === '+') {
+                cantidad++;
+            } else if (this.textContent.trim() === '-' && cantidad > 1) {
+                cantidad--;
+            }
+
+            span.textContent = cantidad;
+            actualizarTotal();
+        });
+    });
+
+    document.querySelectorAll('.btn-danger').forEach(boton => {
+        boton.addEventListener('click', function (e) {
+            e.preventDefault();
+            const fila = this.closest('tr');
+            fila.remove();
+            actualizarTotal();
+        });
+    });
+
+    actualizarTotal();
+});
+
 // Llama a updateTotal después de cada acción
 increaseButtons.forEach(button => {
     button.addEventListener('click', updateTotal);
@@ -109,3 +156,4 @@ decreaseButtons.forEach(button => {
 deleteButtons.forEach(button => {
     button.addEventListener('click', updateTotal);
 });
+

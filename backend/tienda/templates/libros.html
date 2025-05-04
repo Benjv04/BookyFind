@@ -61,16 +61,20 @@
                     <div class="row text-center">
                 {% endif %}
         
-                        <div class="col-md-3">
-                            <a href="#" class="text-decoration-none text-dark">
-                                {% if libro.imagen %}
-                                    <img src="{{ libro.imagen.url }}" class="mx-auto d-block w-50" alt="{{ libro.titulo }}">                                
-                                {% else %}
-                                    <img src="{% static 'assets/default_book.jpg' %}" class="mx-auto d-block w-50" alt="Sin imagen">
-                                {% endif %}
-                                <p class="text-center">{{ libro.titulo }}<br><strong>${{ libro.precio }}</strong></p>
-                            </a>
-                        </div>
+                <div class="col-md-3">
+                    <form method="POST" action="{% url 'agregar_al_carrito' libro.id %}">
+                        {% csrf_token %}
+                        <a href="#" class="text-decoration-none text-dark">
+                            {% if libro.imagen %}
+                                <img src="{{ libro.imagen.url }}" class="mx-auto d-block w-50" alt="{{ libro.titulo }}">                                
+                            {% else %}
+                                <img src="{% static 'assets/default_book.jpg' %}" class="mx-auto d-block w-50" alt="Sin imagen">
+                            {% endif %}
+                            <p class="text-center">{{ libro.titulo }}<br><strong>${{ libro.precio }}</strong></p>
+                        </a>
+                        <button type="submit" class="btn btn-sm btn-outline-success w-100">Agregar al carrito</button>
+                    </form>
+                </div>
         
                 {% if forloop.counter|divisibleby:4 or forloop.last %}
                     </div>
