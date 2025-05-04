@@ -26,6 +26,9 @@ urlpatterns = [
 
     path('pago/exito/', views.pago_exito, name='pago_exito'),
     path('pago/error/', views.pago_error, name='pago_error'),
+
+    path('libros/', views.libros, name='libros'),
+
 ]
 
 
