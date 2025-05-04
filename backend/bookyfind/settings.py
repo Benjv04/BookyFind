@@ -56,9 +56,7 @@ ROOT_URLCONF = 'bookyfind.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR.parent, 'frontend'),  
-        ],
+        'DIRS': [os.path.join(BASE_DIR, 'tienda', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,7 +120,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, '../frontend')
+    os.path.join(BASE_DIR, 'tienda', 'static'),
 ]
 
 # Default primary key field type
@@ -134,7 +132,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'tienda.Usuario'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 from transbank.webpay.webpay_plus.transaction import Transaction
 
