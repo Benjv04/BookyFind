@@ -73,3 +73,11 @@ def pago_exito(request):
 @csrf_exempt
 def pago_error(request):
     return render(request, 'pago_error.html')
+
+
+from django.shortcuts import render
+from .models import Libro
+
+def libros(request):
+    libros = Libro.objects.all()
+    return render(request, 'libros.html', {'libros': libros})
