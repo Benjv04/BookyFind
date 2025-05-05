@@ -69,7 +69,16 @@
                     </a>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">{{ libro.titulo }}</h5>
-                        <p class="card-text"><strong>${{ libro.precio }}</strong></p>
+                        
+                        {% if libro.oferta and libro.precio_oferta %}
+                        <p class="card-text">
+                            <small><del>${{ libro.precio }}</del></small><br>
+                            <strong style="color: red;">${{ libro.get_precio_actual }}</strong>
+                          </p>
+                          {% else %}
+                          <p class="card-text"><strong>${{ libro.get_precio_actual }}</strong></p>
+                        {% endif %}
+    
                         <form method="POST" action="{% url 'agregar_al_carrito' libro.id %}" class="mt-auto">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-sm btn-outline-success w-100">Agregar al carrito</button>
@@ -99,7 +108,16 @@
                                   <p><strong>Editorial:</strong> {{ libro.editorial }}</p>
                                   <p><strong>Publicado:</strong> {{ libro.fecha_publicacion }}</p>
                                   <p><strong>Descripción:</strong> {{ libro.descripcion }}</p>
-                                  <p><strong>Precio:</strong> ${{ libro.precio }}</p>
+
+                                    {% if libro.oferta and libro.precio_oferta %}
+                                        <p>
+                                            <strong>Precio normal:</strong> <del>${{ libro.precio }}</del><br>
+                                            <strong style="color: red;">Oferta: ${{ libro.get_precio_actual }}</strong>
+                                        </p>
+                                    {% else %}
+                                        <p><strong>Precio:</strong> ${{ libro.get_precio_actual }}</strong></p>
+                                    {% endif %}
+
                                   <form method="POST" action="{% url 'agregar_al_carrito' libro.id %}">
                                     {% csrf_token %}
                                     <button type="submit" class="btn btn-outline-success mt-2">Agregar al carrito</button>
