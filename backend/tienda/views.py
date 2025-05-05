@@ -152,3 +152,11 @@ def carrito_view(request):
     carrito = request.session.get("carrito", {})
     total = sum(int(item["precio"]) * int(item["cantidad"]) for item in carrito.values())
     return render(request, "carrito.html", {"total_carrito": total})
+
+
+import random
+
+def index(request):
+    libros = list(Libro.objects.all())
+    libros_mas_vendidos = random.sample(libros, min(len(libros), 4))  # máximo 4 libros
+    return render(request, 'index.html', {'libros_mas_vendidos': libros_mas_vendidos})
