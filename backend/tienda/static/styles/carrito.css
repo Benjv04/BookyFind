@@ -213,18 +213,13 @@
     }
 }
 
-
-.carousel-item img {
-    
-    object-fit: cover;
+button, .btn {
+    background-color: #007bff !important; /* Azul predeterminado de Bootstrap */
+    color: white !important; /* Texto blanco */
+    border: none !important; /* Sin bordes adicionales */
 }
 
-.carousel-item .row {
-    min-height: 100%;
-    align-items: center; /* Asegura que los elementos estén centrados verticalmente */
-}
-
-.card-img-top {
-    height: 200px;         
-    object-fit: cover;     
+button:hover, .btn:hover {
+    background-color: #0056b3 !important; /* Azul más oscuro al pasar el ratón */
+    color: white !important;
 }

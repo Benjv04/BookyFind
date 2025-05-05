@@ -224,7 +224,56 @@
     align-items: center; /* Asegura que los elementos estén centrados verticalmente */
 }
 
+.carousel-inner {
+    width: 80%; /* Define un ancho del 80% */
+    max-width: 1200px; /* Establece un máximo de 1200px de ancho */
+    margin: 0 auto; /* Centra el contenedor */
+    padding: 20px; /* Agrega algo de espacio alrededor */
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+/* css new york time api */
+
+#nyt-books .card {
+    max-width: 300px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+#nyt-books .card:hover {
+    transform: scale(1.05);
+}
+
+#nyt-books .card-img-top {
+    height: 200px;
+    object-fit: contain;
+    border-radius: 5px 5px 0 0;
+    background-color: #f8f9fa;
+}
+
+#nyt-books .card-body {
+    text-align: center;
+}
+
+#nyt-books .card-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#nyt-books .card-text {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+
+/*tamaño de imagen libro*/
 .card-img-top {
     height: 200px;         
-    object-fit: cover;     
+    object-fit: cover;
+    width: 50%;
+    border-radius: 5px;
 }

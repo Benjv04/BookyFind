@@ -55,52 +55,30 @@
     <br>
     <div id="carouselLibros" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="row text-center">
-                    <div class="col-md-3">
-                        <a href="#" class="text-decoration-none text-dark">
-                            <img src="{% static 'assets/amanecerEnLaCosecha.webp' %}" class="mx-auto d-block w-50" alt="Amanecer en la Cosecha">
-                            <p class="text-center">Amanecer en la Cosecha<br><strong>$23.000</strong></p>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="#" class="text-decoration-none text-dark">
-                            <img src="{% static 'assets/ELBUZONDELASIMPURAS.webp' %}" class="mx-auto d-block w-50" alt="El Buzón de las Impuras">
-                            <p class="text-center">El Buzón de las Impuras<br><strong>$20.720</strong></p>
-                        </a> 
-                    </div>
-                    <div class="col-md-3">
-                        <a href="#" class="text-decoration-none text-dark">
-                            <img src="{% static 'assets/portada_alas-de-sangre-empireo.jpg' %}" class="mx-auto d-block w-50" alt="Alas de Sangre">
-                            <p class="text-center">Alas de Sangre<br><strong>$19.920</strong></p>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="#" class="text-decoration-none text-dark">
-                            <img src="{% static 'assets/portada_habitos-atomicos.jpg' %}" class="mx-auto d-block w-50" alt="Hábitos Atómicos">
-                            <p class="text-center">Hábitos Atómicos<br><strong>$20.720</strong></p>
-                        </a>
+            {% for libro in libros %}
+                {% if forloop.counter0|divisibleby:4 %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="row text-center">
+                {% endif %}
+        
+                        <div class="col-md-3">
+                            <a href="#" class="text-decoration-none text-dark">
+                                {% if libro.imagen %}
+                                    <img src="{{ libro.imagen.url }}" class="mx-auto d-block w-50" alt="{{ libro.titulo }}">
+                                {% else %}
+                                    <img src="{% static 'assets/default_book.jpg' %}" class="mx-auto d-block w-50" alt="Sin imagen">
+                                {% endif %}
+                                <p class="text-center">{{ libro.titulo }}<br><strong>${{ libro.precio }}</strong></p>
+                            </a>
+                        </div>
+        
+                {% if forloop.counter|divisibleby:4 or forloop.last %}
                     </div>
                 </div>
-            </div>
-
-            <div class="carousel-item">
-                <div class="row text-center">
-                    <div class="col-md-3">
-                        <a href="#" class="text-decoration-none text-dark">
-                            <img src="{% static 'assets/corazonDelator.webp' %}" class="mx-auto d-block w-50" alt="El Corazon Delator">
-                            <p class="text-center">El Corazon Delator<br><strong>$15.990</strong></p>
-                        </a> 
-                    </div>
-                    <div class="col-md-3">
-                        <a href="#" class="text-decoration-none text-dark">
-                            <img src="{% static 'assets/portada_el-libro-troll_elrubius_202411061504.jpg' %}" class="mx-auto d-block w-50" alt="El Libro Troll">
-                            <p class="text-center">El Libro Troll<br><strong>$5.990</strong></p>
-                        </a> 
-                    </div>
-                </div>
-            </div>
+                {% endif %}
+            {% endfor %}
         </div>
+        
 
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselLibros" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="false"></span>

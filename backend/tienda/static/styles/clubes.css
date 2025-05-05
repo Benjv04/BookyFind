@@ -21,7 +21,7 @@
     cursor: pointer;
     color: #333;
     padding: 10px;
-    z-index: 1001; /* Asegura que esté por encima del contenido */
+    z-index: 1001;
 }
 
 .menu {
@@ -64,7 +64,7 @@
     color: #333;
     font-size: 16px;
     transition: color 0.3s;
-    display: inline-block; /* Añadido para mejor control */
+    display: inline-block;
 }
 
 .nav-link:hover {
@@ -136,9 +136,69 @@
     font-size: 12px;
 }
 
+/* CONTENIDO PRINCIPAL */
+.container-club {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start; /* Alinea los items al inicio */
+    gap: 40px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
 
-/* PARA K SEA RESPONSIVO*/
+.container-informacion {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
 
+.container-img {
+    flex: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px; /* Mismo padding que container-informacion */
+    background-color: white; /* Mismo fondo */
+  
+}
+
+.container-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: contain; /* Asegura que la imagen se ajuste correctamente */
+}
+
+/* TIPOGRAFÍA */
+.titulo-vista {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.subtitulo-vista {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.container-informacion p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #495057;
+}
+
+.container-informacion strong {
+    color: #2c3e50;
+}
+
+/* RESPONSIVIDAD */
 @media (max-width: 992px) {
     .menu-hamburguesa {
         display: block;
@@ -154,8 +214,8 @@
     }
     
     .menu-contenido {
-        position: fixed; /* Cambiado de absolute a fixed */
-        top: 70px; /* Ajusta según la altura de tu header */
+        position: fixed;
+        top: 70px;
         left: 0;
         width: 100%;
         background-color: #ffffff;
@@ -172,7 +232,7 @@
     }
     
     .menu-toggle:checked ~ .menu-contenido {
-        max-height: calc(100vh - 70px); /* Ajusta según la altura de tu header */
+        max-height: calc(100vh - 70px);
         opacity: 1;
         visibility: visible;
     }
@@ -213,18 +273,47 @@
     }
 }
 
-
-.carousel-item img {
+@media (max-width: 768px) {
+    .container-club {
+        flex-direction: column;
+        gap: 20px;
+    }
     
-    object-fit: cover;
+    .container-informacion,
+    .container-img {
+        max-width: 100%;
+        min-width: 100%;
+    }
+    
+    .container-informacion,
+    .container-img {
+        padding: 20px; /* Mismo padding en móvil */
+    }
+    
+    .menu {
+        padding: 0 15px;
+    }
 }
 
-.carousel-item .row {
-    min-height: 100%;
-    align-items: center; /* Asegura que los elementos estén centrados verticalmente */
-}
-
-.card-img-top {
-    height: 200px;         
-    object-fit: cover;     
+@media (max-width: 480px) {
+    .titulo-tienda {
+        font-size: 20px;
+    }
+    
+    .btn {
+        padding: 5px 8px;
+    }
+    
+    .carrito-btn {
+        padding: 6px 12px;
+    }
+    
+    .container-img img {
+        max-height: 250px;
+    }
+    
+    .container-informacion,
+    .container-img {
+        padding: 15px; /* Padding reducido en móviles pequeños */
+    }
 }

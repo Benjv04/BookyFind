@@ -23,10 +23,13 @@ class Usuario(AbstractUser):
 class Libro(models.Model):
     titulo = models.CharField(max_length=255)
     autor = models.CharField(max_length=255)
-    precio = models.DecimalField(max_digits=6, decimal_places=2)
+    editorial = models.CharField(max_length=255, blank=True, null=True)
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField()
-    imagen = models.ImageField(upload_to='libros/', null=True, blank=True)
-
+    descripcion = models.TextField(blank=True)
+    imagen = models.ImageField(upload_to='libros/', blank=True, null=True)
+    fecha_publicacion = models.DateField(blank=True, null=True)
+    
     def __str__(self):
         return self.titulo
 

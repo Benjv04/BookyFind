@@ -1,20 +1,23 @@
 const deeplApiKey = '915ad76d-feb6-41c6-a71a-d43874236a92:fx'; // Reemplaza con tu clave real de DeepL
 
-
-// para que no deje modificar el url que no sean lo base
+/*
+// Redireccionar si la URL no es válida
 document.addEventListener("DOMContentLoaded", function () {
     const esLocal = window.location.protocol === "file:";
-    if (esLocal) return; // No aplicar redirección si estás trabajando con archivos locales
+    if (esLocal) return;
 
-    const paginasPermitidas = ["/", "/index.html", "/contacto.html", "/libros.html", "/carrito.html", "/clubes.html", "/ofertas.html"];
+    const paginasPermitidas = [
+        "/", "/index.html", "/contacto.html", "/libros.html",
+        "/carrito.html", "/clubes.html", "/ofertas.html"
+    ];
     const pathname = window.location.pathname;
 
     if (!paginasPermitidas.includes(pathname)) {
         window.location.href = "/index.html";
     }
-});
+}); */
 
-// 🔹 Función para traducir texto con DeepL
+// Función para traducir texto con DeepL
 async function translateText(text, targetLang = 'ES') {
     if (!text || text.trim() === '') return 'Sin descripción disponible';
 
@@ -39,12 +42,12 @@ async function translateText(text, targetLang = 'ES') {
         const data = await response.json();
         return data.translations[0].text || text;
     } catch (error) {
-        console.error(' Error en la traducción con DeepL:', error);
+        console.error('Error en la traducción con DeepL:', error);
         return text;
     }
 }
 
-//  API del New York Times
+// Obtener libros desde la API del New York Times
 const apiKey = 'wJGxjjL9Z1FT7yfO4LeFpbipiAJqE1iP';
 const apiUrl = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${apiKey}`;
 
@@ -54,7 +57,7 @@ async function fetchNYTBooks() {
         const data = await response.json();
 
         if (data && data.results && data.results.books) {
-            const books = data.results.books.slice(0, 6); // Muestra solo los primeros 6 libros
+            const books = data.results.books.slice(0, 6); // Solo los primeros 6 libros
             const booksContainer = document.getElementById('nyt-books');
             booksContainer.innerHTML = '';
 
@@ -86,74 +89,3 @@ async function fetchNYTBooks() {
 }
 
 document.addEventListener('DOMContentLoaded', fetchNYTBooks);
-
-// 🔹 Cálculo del total del carrito
-function updateTotal() {
-    let total = 0;
-    const rows = document.querySelectorAll('tbody tr');
-    rows.forEach(row => {
-        const price = parseFloat(row.querySelector('td:nth-child(2)').textContent.replace('$', '').replace('.', ''));
-        const quantity = parseInt(row.querySelector('.quantity').textContent);
-        total += price * quantity;
-    });
-    document.querySelector('th[colspan="3"] + th').textContent = `$${total.toLocaleString()}`;
-}
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    function actualizarTotal() {
-        let total = 0;
-        const filas = document.querySelectorAll('tbody tr');
-        filas.forEach(fila => {
-            const precioTexto = fila.querySelector('td:nth-child(2)');
-            const cantidadTexto = fila.querySelector('td:nth-child(3) span');
-            if (precioTexto && cantidadTexto) {
-                const precio = parseInt(precioTexto.textContent.replace('$', '').replace('.', ''));
-                const cantidad = parseInt(cantidadTexto.textContent);
-                total += precio * cantidad;
-            }
-        });
-
-        const filaTotal = document.querySelector('tbody tr:last-child th:last-child');
-        filaTotal.textContent = `$${total.toLocaleString('es-CL')}`;
-    }
-
-    document.querySelectorAll('.btn-secondary').forEach(boton => {
-        boton.addEventListener('click', function () {
-            const span = this.parentElement.querySelector('span');
-            let cantidad = parseInt(span.textContent);
-
-            if (this.textContent.trim() === '+') {
-                cantidad++;
-            } else if (this.textContent.trim() === '-' && cantidad > 1) {
-                cantidad--;
-            }
-
-            span.textContent = cantidad;
-            actualizarTotal();
-        });
-    });
-
-    document.querySelectorAll('.btn-danger').forEach(boton => {
-        boton.addEventListener('click', function (e) {
-            e.preventDefault();
-            const fila = this.closest('tr');
-            fila.remove();
-            actualizarTotal();
-        });
-    });
-
-    actualizarTotal();
-});
-
-// Llama a updateTotal después de cada acción
-increaseButtons.forEach(button => {
-    button.addEventListener('click', updateTotal);
-});
-decreaseButtons.forEach(button => {
-    button.addEventListener('click', updateTotal);
-});
-deleteButtons.forEach(button => {
-    button.addEventListener('click', updateTotal);
-});
-
