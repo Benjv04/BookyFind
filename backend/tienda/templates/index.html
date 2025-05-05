@@ -36,11 +36,13 @@
                 <button class="btn btn-primary">🔍</button>
             </div>
             <div class="container-carrito">
-                <a href="carrito.html" class="btn btn-outline-primary carrito-btn">
+                <a href="{% url 'carrito' %}" class="btn btn-outline-primary carrito-btn position-relative">
                     <i class="bi bi-basket-fill"></i>
-                    <span class="carrito-contador">0</span>
+                    <span class="carrito-contador position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ total_items_carrito }}
+                    </span>
                 </a>
-            </div> 
+            </div>
         </div>
     </header>
 
