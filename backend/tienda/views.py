@@ -3,6 +3,7 @@ from transbank.webpay.webpay_plus.transaction import Transaction
 from django.http import HttpResponse
 from django.urls import reverse
 import uuid
+from .models import Libro
 
 
 # Instanciar una vez
@@ -95,22 +96,39 @@ def libros(request):
     libros = Libro.objects.all()
     return render(request, 'libros.html', {'libros': libros})
 
+
+def ofertas(request):
+    # Obtener todos los libros que están en oferta
+    libros_en_oferta = Libro.objects.filter(oferta=True)
+
+    # Pasar los libros al contexto
+    return render(request, 'ofertas.html', {'libros_en_oferta': libros_en_oferta})
+
+
 def agregar_al_carrito(request, libro_id):
     libro = get_object_or_404(Libro, pk=libro_id)
     carrito = request.session.get('carrito', {})
 
+    # Usar el precio con descuento si el libro está en oferta, de lo contrario, usar el precio normal
+    precio_libro = libro.precio_oferta if libro.oferta else libro.precio
+
+    # Verificar si el libro ya está en el carrito
     if str(libro_id) in carrito:
         carrito[str(libro_id)]['cantidad'] += 1
     else:
+        # Agregar el libro al carrito con el precio correcto
         carrito[str(libro_id)] = {
             'titulo': libro.titulo,
-            'precio': float(libro.precio),
+            'precio': float(precio_libro),  # Asegúrate de guardar el precio correcto
             'cantidad': 1,
             'imagen': libro.imagen.url if libro.imagen else None,
         }
 
+    # Guardar los cambios en la sesión
     request.session['carrito'] = carrito
     request.session.modified = True
+
+    # Redirigir al usuario donde estaba (en este caso a la página de libros)
     return redirect('libros')
 
 def carrito_view(request):

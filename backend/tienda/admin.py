@@ -27,6 +27,5 @@ class LibroAdmin(admin.ModelAdmin):
               'fecha_publicacion', 'oferta', 'precio_oferta')
 
 admin.site.register(Usuario, UsuarioAdmin)
-admin.site.register(Libro)
 admin.site.register(Libro, LibroAdmin)
 admin.site.register(Pedido)
