@@ -21,7 +21,10 @@
 
     <header class="container-menu">
         <div class="menu">
-            <h1 class="titulo-tienda">BookyFind</h1>
+            <a href="{% url 'index' %}">
+                <img src="{% static 'assets/logo.png' %}" alt="BookyFind" style="height:auto; width:130px;">
+            </a>
+
             <nav>
                 <ul class="nav">
                     <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Inicio</a></li>
