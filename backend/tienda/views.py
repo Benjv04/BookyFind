@@ -129,7 +129,8 @@ def agregar_al_carrito(request, libro_id):
     request.session.modified = True
 
     # Redirigir al usuario donde estaba (en este caso a la página de libros)
-    return redirect('libros')
+    return redirect(request.META.get('HTTP_REFERER', 'libros'))
+
 
 def carrito_view(request):
     carrito = request.session.get("carrito", {})
@@ -172,9 +173,9 @@ def carrito_view(request):
     return render(request, "carrito.html", {"total_carrito": total})
 
 
-import random
+from .models import Libro
 
 def index(request):
-    libros = list(Libro.objects.all())
-    libros_mas_vendidos = random.sample(libros, min(len(libros), 4))  # máximo 4 libros
-    return render(request, 'index.html', {'libros_mas_vendidos': libros_mas_vendidos})
+    libros_destacados = Libro.objects.all()[:4]
+    return render(request, 'index.html', {'libros_destacados': libros_destacados})
+

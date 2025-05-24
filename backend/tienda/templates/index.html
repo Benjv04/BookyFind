@@ -24,11 +24,11 @@
             <h1 class="titulo-tienda">BookyFind</h1>
             <nav>
                 <ul class="nav">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="libros.html">Libros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="clubes.html">Clubes de Lectura</a></li>
-                    <li class="nav-item"><a class="nav-link" href="ofertas.html">Ofertas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'libros' %}">Libros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'clubes' %}">Clubes de Lectura</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'ofertas' %}">Ofertas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">Contacto</a></li>
                 </ul>
             </nav>
             <div class="container-buscador">
@@ -70,38 +70,31 @@
 
         <!-- Sección de Carrusel -->
     <div class="container mt-5">
-        <h2 class="text-center"><strong >Más Vendidos</strong></h2>
-        <div id="carouselLibros" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="row text-center">
-                        <div class="col-md-3">
-                            <a href="#" class="text-decoration-none text-dark">
-                                <img src="{% static 'assets/amanecerEnLaCosecha.webp' %}" class="mx-auto d-block w-50" alt="Amanecer en la Cosecha">
-                                <p class="text-center">Amanecer en la Cosecha<br><strong>$23.000</strong></p>
-                            </a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#" class="text-decoration-none text-dark">
-                                <img src="{% static 'assets/ELBUZONDELASIMPURAS.webp' %}" class="mx-auto d-block w-50" alt="El Buzón de las Impuras">
-                                <p class="text-center">El Buzón de las Impuras<br><strong>$20.720</strong></p>
-                            </a> 
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#" class="text-decoration-none text-dark">
-                                <img src="{% static 'assets/portada_alas-de-sangre-empireo.jpg' %}" class="mx-auto d-block w-50" alt="Alas de Sangre">
-                                <p class="text-center">Alas de Sangre<br><strong>$19.920</strong></p>
-                            </a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#" class="text-decoration-none text-dark">
-                                <img src="{% static 'assets/portada_habitos-atomicos.jpg' %}" class="mx-auto d-block w-50" alt="Hábitos Atómicos">
-                                <p class="text-center">Hábitos Atómicos<br><strong>$20.720</strong></p>
-                            </a>
-                        </div>
+        <h2 class="text-center"><strong>Más Vendidos</strong></h2>
+        <div class="row text-center">
+            {% for libro in libros_destacados %}
+            <div class="col-md-3 mb-4">
+                <div class="card h-100">
+                    {% if libro.imagen %}
+                        <img src="{{ libro.imagen.url }}" class="card-img-top img-fluid" alt="{{ libro.titulo }}">
+                    {% else %}
+                        <img src="{% static 'assets/default_book.jpg' %}" class="card-img-top img-fluid" alt="Sin imagen">
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ libro.titulo }}</h5>
+                        <p class="card-text"><strong>${{ libro.precio }}</strong></p>
+                        <form method="POST" action="{% url 'agregar_al_carrito' libro.id %}" class="mt-auto">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-success w-100">Agregar al carrito</button>
+                        </form>
                     </div>
                 </div>
             </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
             
 
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselLibros" data-bs-slide="prev">
