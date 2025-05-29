@@ -29,6 +29,14 @@ class Libro(models.Model):
     descripcion = models.TextField(blank=True)
     imagen = models.ImageField(upload_to='libros/', blank=True, null=True)
     fecha_publicacion = models.DateField(blank=True, null=True)
+    oferta = models.BooleanField(default=False)
+    precio_oferta = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+
+    def get_precio_actual(self):
+        if self.oferta and self.precio_oferta:
+            return self.precio_oferta
+        return self.precio
+
     
     def __str__(self):
         return self.titulo

@@ -268,3 +268,14 @@
     font-size: 0.9rem;
     color: #555;
 }
+
+
+/*tamaño de imagen libro*/
+.card-img-top {
+    height: 200px;
+    object-fit: contain;
+    width: 50%;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+}

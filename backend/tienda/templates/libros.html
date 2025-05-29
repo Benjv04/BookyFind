@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>BookyFind - Libros</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <link rel="stylesheet" href="{% static 'styles/libros.css' %}">
     
@@ -23,8 +23,9 @@
             <i class="bi bi-list"></i>
         </label>
         
-        <h1 class="titulo-tienda">BookyFind</h1>
-        
+         <a href="{% url 'index' %}">
+                <img src="{% static 'assets/logo.png' %}" alt="BookyFind" style="height:auto; width:130px;">
+            </a>        
         <div class="menu-contenido">
             <nav>
                 <ul class="nav">
@@ -40,60 +41,101 @@
                 <button class="btn btn-primary">🔍</button>
             </div>
             <div class="container-carrito">
-                <a href="{% url 'carrito' %}" class="btn btn-outline-primary carrito-btn">
+                <a href="{% url 'carrito' %}" class="btn btn-outline-primary carrito-btn position-relative">
                     <i class="bi bi-basket-fill"></i>
-                    <span class="carrito-contador">0</span>
+                    <span class="carrito-contador position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ total_items_carrito }}
+                    </span>
                 </a>
             </div>
+            
         </div>
     </div>
 </header>
 
-<!-- Sección de Carrusel -->
+<!-- Sección de Libros -->
 <div class="container mt-5">
     <h2 class="titulo text-center"><strong>Nuestra variedad</strong></h2>
     <br>
-    <div id="carouselLibros" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            {% for libro in libros %}
-                {% if forloop.counter0|divisibleby:4 %}
-                <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                    <div class="row text-center">
-                {% endif %}
-        
-                <div class="col-md-3">
-                    <form method="POST" action="{% url 'agregar_al_carrito' libro.id %}">
-                        {% csrf_token %}
-                        <a href="#" class="text-decoration-none text-dark">
-                            {% if libro.imagen %}
-                                <img src="{{ libro.imagen.url }}" class="mx-auto d-block w-50" alt="{{ libro.titulo }}">                                
-                            {% else %}
-                                <img src="{% static 'assets/default_book.jpg' %}" class="mx-auto d-block w-50" alt="Sin imagen">
-                            {% endif %}
-                            <p class="text-center">{{ libro.titulo }}<br><strong>${{ libro.precio }}</strong></p>
-                        </a>
-                        <button type="submit" class="btn btn-sm btn-outline-success w-100">Agregar al carrito</button>
-                    </form>
-                </div>
-        
-                {% if forloop.counter|divisibleby:4 or forloop.last %}
+    <div class="row">
+        {% for libro in libros %}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                <div class="card h-100">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalLibro{{ libro.id }}">
+                        {% if libro.imagen %}
+                            <img src="{{ libro.imagen.url }}" class="card-img-top img-fluid" alt="{{ libro.titulo }}">
+                        {% else %}
+                            <img src="{% static 'assets/default_book.jpg' %}" class="card-img-top img-fluid" alt="Sin imagen">
+                        {% endif %}
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ libro.titulo }}</h5>
+                        
+                        {% if libro.oferta and libro.precio_oferta %}
+                        <p class="card-text">
+                            <small><del>${{ libro.precio }}</del></small><br>
+                            <strong style="color: red;">${{ libro.get_precio_actual }}</strong>
+                          </p>
+                          {% else %}
+                          <p class="card-text"><strong>${{ libro.get_precio_actual }}</strong></p>
+                        {% endif %}
+    
+                        <form method="POST" action="{% url 'agregar_al_carrito' libro.id %}" class="mt-auto">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-success w-100">Agregar al carrito</button>
+                        </form>
                     </div>
                 </div>
-                {% endif %}
-            {% endfor %}
-        </div>
-        
+            </div>
 
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselLibros" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="false"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselLibros" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="false"></span>
-        </button>
+            <!-- Modal para cada libro -->
+            <div class="modal fade" id="modalLibro{{ libro.id }}" tabindex="-1" aria-labelledby="modalLibroLabel{{ libro.id }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalLibroLabel{{ libro.id }}">{{ libro.titulo }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                              <div class="row">
+                                <!-- Imagen -->
+                                <div class="col-md-4 text-center mb-3">
+                                  <img src="{{ libro.imagen.url }}" class="img-fluid" alt="{{ libro.titulo }}"loading="lazy">
+                                </div>
+                                <!-- Detalles del libro -->
+                                <div class="col-md-8">
+                                  <p><strong>Autor:</strong> {{ libro.autor }}</p>
+                                  <p><strong>Editorial:</strong> {{ libro.editorial }}</p>
+                                  <p><strong>Publicado:</strong> {{ libro.fecha_publicacion }}</p>
+                                  <p><strong>Descripción:</strong> {{ libro.descripcion }}</p>
+
+                                    {% if libro.oferta and libro.precio_oferta %}
+                                        <p>
+                                            <strong>Precio normal:</strong> <del>${{ libro.precio }}</del><br>
+                                            <strong style="color: red;">Oferta: ${{ libro.get_precio_actual }}</strong>
+                                        </p>
+                                    {% else %}
+                                        <p><strong>Precio:</strong> ${{ libro.get_precio_actual }}</strong></p>
+                                    {% endif %}
+
+                                  <form method="POST" action="{% url 'agregar_al_carrito' libro.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-outline-success mt-2">Agregar al carrito</button>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
-</div> 
+</div>
+
 
 <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
