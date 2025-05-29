@@ -70,48 +70,72 @@
 
         <!-- Sección de Carrusel -->
     <div class="container mt-5">
-        <h2 class="text-center"><strong >Más Vendidos</strong></h2>
+        <h2 class="text-center"><strong>Más Vendidos</strong></h2>
         <div id="carouselLibros" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
+
                 <div class="carousel-item active">
-                    <div class="row text-center">
-                        <div class="col-md-3">
-                            <a href="#" class="text-decoration-none text-dark">
-                                <img src="{% static 'assets/amanecerEnLaCosecha.webp' %}" class="mx-auto d-block w-50" alt="Amanecer en la Cosecha">
-                                <p class="text-center">Amanecer en la Cosecha<br><strong>$23.000</strong></p>
+                    <div class="row text-center justify-content-center">
+                        {% comment %} Libros 1 a 3 {% endcomment %}
+                        {% for libro in libros|slice:":3" %}
+                        <div class="col-md-4">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalLibro{{ forloop.counter }}">
+                                <img src="{{ libro.imagen }}" class="img-fluid w-75 mx-auto d-block" alt="{{ libro.titulo }}">
+                                <p class="text-center mt-2">{{ libro.titulo }}<br><strong>${{ libro.precio }}</strong></p>
                             </a>
                         </div>
-                        <div class="col-md-3">
-                            <a href="#" class="text-decoration-none text-dark">
-                                <img src="{% static 'assets/ELBUZONDELASIMPURAS.webp' %}" class="mx-auto d-block w-50" alt="El Buzón de las Impuras">
-                                <p class="text-center">El Buzón de las Impuras<br><strong>$20.720</strong></p>
-                            </a> 
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#" class="text-decoration-none text-dark">
-                                <img src="{% static 'assets/portada_alas-de-sangre-empireo.jpg' %}" class="mx-auto d-block w-50" alt="Alas de Sangre">
-                                <p class="text-center">Alas de Sangre<br><strong>$19.920</strong></p>
-                            </a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#" class="text-decoration-none text-dark">
-                                <img src="{% static 'assets/portada_habitos-atomicos.jpg' %}" class="mx-auto d-block w-50" alt="Hábitos Atómicos">
-                                <p class="text-center">Hábitos Atómicos<br><strong>$20.720</strong></p>
-                            </a>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
+
+                <div class="carousel-item">
+                    <div class="row text-center justify-content-center">
+                        {% comment %} Libros 4 a 6 {% endcomment %}
+                        {% for libro in libros|slice:"3:6" %}
+                        <div class="col-md-4">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalLibro{{ forloop.counter|add:'3' }}">
+                                <img src="{{ libro.imagen }}" class="img-fluid w-75 mx-auto d-block" alt="{{ libro.titulo }}">
+                                <p class="text-center mt-2">{{ libro.titulo }}<br><strong>${{ libro.precio }}</strong></p>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
             </div>
-            
 
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselLibros" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+                <span class="carousel-control-prev-icon"></span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselLibros" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="false"></span>
+                <span class="carousel-control-next-icon"></span>
             </button>
         </div>
     </div>
+
+<!-- Modales por libro -->
+    {% for libro in libros|slice:":6" %}
+    <div class="modal fade" id="modalLibro{{ forloop.counter }}" tabindex="-1" aria-labelledby="modalLibroLabel{{ forloop.counter }}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLibroLabel{{ forloop.counter }}">{{ libro.titulo }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="{{ libro.imagen }}" class="img-fluid mb-3" alt="{{ libro.titulo }}">
+                    <p><strong>Precio:</strong> ${{ libro.precio }}</p>
+                    <p><strong>Autor:</strong> {{ libro.autor }}</p>
+                    <p>{{ libro.descripcion }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <a href="{% url 'agregar_al_carrito' libro.id %}" class="btn btn-primary">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 
     <div class="container mt-5">
         <h2 class="text-center"><strong>Libros Destacados del New York Times</strong></h2>

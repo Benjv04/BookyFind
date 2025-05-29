@@ -66,7 +66,7 @@ def iniciar_pago(request):
 
 from django.views.decorators.csrf import csrf_exempt
 
-transaction = Transaction()
+
 
 def pago_exito(request):
     token = request.POST.get('token_ws') or request.GET.get('token_ws')
@@ -166,15 +166,11 @@ def eliminar_del_carrito(request, producto_id):
     request.session.modified = True
     return redirect('carrito')
 
-def carrito_view(request):
-    carrito = request.session.get("carrito", {})
-    total = sum(int(item["precio"]) * int(item["cantidad"]) for item in carrito.values())
-    return render(request, "carrito.html", {"total_carrito": total})
 
 
 import random
 
 def index(request):
     libros = list(Libro.objects.all())
-    libros_mas_vendidos = random.sample(libros, min(len(libros), 4))  # máximo 4 libros
+    libros_mas_vendidos = random.sample(libros, min(len(libros), 4))
     return render(request, 'index.html', {'libros_mas_vendidos': libros_mas_vendidos})
