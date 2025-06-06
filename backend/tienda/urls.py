@@ -3,6 +3,9 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import carrito_view
+from django.contrib.auth import views as auth_views
+from .views import cuenta_view, admin_panel, registro_usuario, login_view, admin_productos, editar_producto, admin_usuarios, eliminar_usuario
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -35,6 +38,17 @@ urlpatterns = [
     path('carrito/eliminar/<str:producto_id>/', views.eliminar_del_carrito, name='eliminar_del_carrito'),
 
     path("carrito/", carrito_view, name="ver_carrito"),
+
+
+    path('cuenta/', cuenta_view, name='cuenta'),
+    path('logout/', LogoutView.as_view(next_page='index'), name='logout'),
+    path('admin-panel/', admin_panel, name='admin_panel'),
+    path('cuenta/registro/', registro_usuario, name='registro'),
+    path('cuenta/login/', login_view, name='login'),
+    path('admin-panel/productos/', admin_productos, name='admin_productos'),
+    path('admin-panel/productos/<int:libro_id>/editar/', editar_producto, name='editar_producto'),
+    path('admin-panel/usuarios/', admin_usuarios, name='admin_usuarios'),
+    path('admin-panel/usuarios/<int:usuario_id>/eliminar/', eliminar_usuario, name='eliminar_usuario'),
 
 ]
 

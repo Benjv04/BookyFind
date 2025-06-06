@@ -1,7 +1,5 @@
-<!DOCTYPE html>
 {% load static %}
-
-
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -18,34 +16,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-    <header class="container-menu">
-        <div class="menu">
-            <a href="{% url 'index' %}">
-                <img src="{% static 'assets/logo.png' %}" alt="BookyFind" style="height:auto; width:130px;">
-            </a>
-            <nav>
-                <ul class="nav">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'libros' %}">Libros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'clubes' %}">Clubes de Lectura</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'ofertas' %}">Ofertas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">Contacto</a></li>
-                </ul>
-            </nav>
-            <div class="container-buscador">
-                <input class="buscador" type="text" placeholder="Buscar en la tienda...">
-                <button class="btn btn-primary">🔍</button>
-            </div>
-            <div class="container-carrito">
-                <a href="{% url 'carrito' %}" class="btn btn-outline-primary carrito-btn position-relative">
-                    <i class="bi bi-basket-fill"></i>
-                    <span class="carrito-contador position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {{ total_items_carrito }}
-                    </span>
-                </a>
-            </div>
-        </div>
-    </header>
+     {% include 'partials/menu.html' %}
 
     <!----BANNER CARRUSEL---->
     <section id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -94,17 +65,14 @@
             {% endfor %}
         </div>
     </div>
-
-
-            
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselLibros" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="false"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselLibros" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="false"></span>
-            </button>
-        </div>
+    <div class="moviemientoCarrusel">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselLibros" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselLibros" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="false"></span>
+        </button>
+       
     </div>
 
     <div class="container mt-5">

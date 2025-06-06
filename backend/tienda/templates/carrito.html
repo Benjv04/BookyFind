@@ -12,39 +12,7 @@
 </head>
 <body>
 
-<header class="container-menu">
-    <div class="menu">
-        <input type="checkbox" id="menu-toggle" class="menu-toggle">
-        <label for="menu-toggle" class="menu-hamburguesa">
-            <i class="bi bi-list"></i>
-        </label>
-        
-         <a href="{% url 'index' %}">
-                <img src="{% static 'assets/logo.png' %}" alt="BookyFind" style="height:auto; width:130px;">
-            </a>        
-        <div class="menu-contenido">
-            <nav>
-                <ul class="nav">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'libros' %}">Libros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'clubes' %}">Clubes de Lectura</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'ofertas' %}">Ofertas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">Contacto</a></li>
-                </ul>
-            </nav>
-            <div class="container-buscador">
-                <input class="buscador" type="text" placeholder="Buscar en la tienda...">
-                <button class="btn btn-primary">🔍</button>
-            </div>
-            <div class="container-carrito">
-                <a href="{% url 'ver_carrito' %}" class="btn btn-outline-primary carrito-btn">
-                    <i class="bi bi-basket-fill"></i>
-                    <span class="carrito-contador">{{ request.session.carrito|length }}</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</header>
+ {% include 'partials/menu.html' %}
 
 <br>
 
