@@ -1,27 +1,20 @@
-/* MENU TOGGLE */
-.menu-toggle {
-    display: none;
-    position: absolute;
-    opacity: 0;
-    left: -9999px;
+:root {
+    --color-primario: #007bff;
+    --color-secundario: #00c3ff;
+    --color-fondo: #f5f7fa;
+    --color-texto: #333;
 }
 
-/* MENU PRINCIPAL */
+/* ==========================
+   NAVBAR
+========================== */
 .container-menu {
-    background-color: #ffffff;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
     padding: 15px 0;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.menu-hamburguesa {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #333;
-    padding: 10px;
-    z-index: 1001; /* Asegura que esté por encima del contenido */
 }
 
 .menu {
@@ -31,7 +24,6 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    position: relative;
 }
 
 .menu-contenido {
@@ -39,20 +31,32 @@
     align-items: center;
 }
 
-/* TITULO */
-.titulo-tienda {
+.menu-hamburguesa {
+    display: none;
     font-size: 24px;
-    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 10px;
     color: #333;
-    margin: 0;
+    z-index: 1001;
 }
 
-/* NAVEGACION */
+.menu-toggle {
+    display: none;
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+}
+
+/* ==========================
+   NAV LINKS
+========================== */
 .nav {
     display: flex;
     list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
 }
 
 .nav-item {
@@ -61,17 +65,19 @@
 
 .nav-link {
     text-decoration: none;
-    color: #333;
+    color: var(--color-texto);
     font-size: 16px;
     transition: color 0.3s;
-    display: inline-block; /* Añadido para mejor control */
 }
 
 .nav-link:hover {
-    color: #007bff;
+    color: var(--color-primario);
+    font-weight: bold;
 }
 
-/* BUSCADOR */
+/* ==========================
+   BUSCADOR
+========================== */
 .container-buscador {
     display: flex;
     align-items: center;
@@ -84,21 +90,23 @@
     outline: none;
 }
 
-.btn {
+.container-buscador .btn {
     margin-left: 5px;
-    background-color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.btn:hover {
-    background-color: #0056b3;
+    background-color: var(--color-primario);
     color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
-/* CARRITO */
+.container-buscador .btn:hover {
+    background-color: #0056b3;
+}
+
+/* ==========================
+   CARRITO
+========================== */
 .container-carrito {
     margin-left: 15px;
 }
@@ -107,17 +115,17 @@
     position: relative;
     padding: 8px 12px;
     border-radius: 50%;
-    color: #007bff;
-    border: 1px solid #007bff;
+    color: var(--color-primario);
+    border: 1px solid var(--color-primario);
     background-color: white;
-    text-decoration: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s;
 }
 
 .carrito-btn:hover {
-    background-color: #007bff;
+    background-color: var(--color-primario);
     color: white;
 }
 
@@ -125,7 +133,7 @@
     position: absolute;
     top: -5px;
     right: -5px;
-    background-color: #ff6b6b;
+    background-color: var(--color-secundario);
     color: white;
     border-radius: 50%;
     width: 20px;
@@ -136,33 +144,23 @@
     font-size: 12px;
 }
 
-
-/* PARA K SEA RESPONSIVO*/
-
+/* ==========================
+   RESPONSIVE NAVBAR
+========================== */
 @media (max-width: 992px) {
     .menu-hamburguesa {
         display: block;
-        order: 1;
     }
-    
-    .titulo-tienda {
-        order: 2;
-        margin: 0 auto;
-        padding: 0 20px;
-        text-align: center;
-        flex-grow: 1;
-    }
-    
+
     .menu-contenido {
-        position: fixed; /* Cambiado de absolute a fixed */
-        top: 70px; /* Ajusta según la altura de tu header */
+        position: fixed;
+        top: 70px;
         left: 0;
         width: 100%;
-        background-color: #ffffff;
         flex-direction: column;
         align-items: center;
+        background-color: white;
         padding: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         z-index: 1000;
         max-height: 0;
         overflow: hidden;
@@ -170,69 +168,53 @@
         opacity: 0;
         visibility: hidden;
     }
-    
+
     .menu-toggle:checked ~ .menu-contenido {
-        max-height: calc(100vh - 70px); /* Ajusta según la altura de tu header */
+        max-height: calc(100vh - 70px);
         opacity: 1;
         visibility: visible;
     }
-    
+
     .nav {
         flex-direction: column;
         width: 100%;
-        margin-bottom: 20px;
         text-align: center;
     }
-    
+
     .nav-item {
-        margin: 0 0 15px 0;
+        margin-bottom: 15px;
         width: 100%;
     }
-    
+
     .nav-link {
-        width: 100%;
-        padding: 10px 0;
         display: block;
+        padding: 10px 0;
     }
-    
+
     .container-buscador {
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto 20px;
+        margin-bottom: 15px;
     }
-    
+
     .container-carrito {
-        width: 100%;
-        margin: 0;
         text-align: center;
     }
-    
+
     .carrito-btn {
         border-radius: 4px;
-        padding: 8px 15px;
     }
 }
 
-
-.carousel-item img {
-    
-    object-fit: cover;
-}
-
-.carousel-item .row {
-    min-height: 100%;
-    align-items: center; /* Asegura que los elementos estén centrados verticalmente */
-}
-
-
-/*tamaño de imagen libro*/
+/* ==========================
+   LIBROS / CARDS
+========================== */
 .card-img-top {
-    height: 450px;         
-    object-fit: cover;
+    height: 300px; /* antes era 450px */
+    object-fit: contain; /* mejor si tus portadas tienen distintas proporciones */
     width: 100%;
     border-radius: 5px;
+    background-color: #f9f9f9;
+    padding: 10px;
 }
-
 
 .imagen-libro-container {
     position: relative;
@@ -242,11 +224,36 @@
     position: absolute;
     top: 10px;
     left: 10px;
-    width: 70px; /* ajusta el tamaño según lo necesites */
+    width: 70px;
     height: auto;
     z-index: 10;
 }
 
+.btn-outline-success {
+    border-color: var(--color-secundario);
+    color: var(--color-secundario);
+}
+
+.btn-outline-success:hover {
+    background-color: var(--color-secundario);
+    color: white;
+}
+
+/* ==========================
+   MODALES
+========================== */
+.modal-content {
+    border-radius: 8px;
+}
+
+.modal-header {
+    background-color: var(--color-fondo);
+    border-bottom: 1px solid #ddd;
+}
+
+/* ==========================
+   TÍTULOS SUBRAYADOS
+========================== */
 .titulo-subrayado {
     position: relative;
     display: inline-block;
@@ -261,9 +268,9 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 50vw; /* Mucho más larga */
-    height: 1px;  /* Mantiene grosor fino */
-    background-color: #ff4500;
+    width: 50vw;
+    height: 1px;
+    background-color: #00c3ff;
     opacity: 0.5;
 }
 
@@ -275,6 +282,6 @@
     transform: translateX(-50%);
     width: 100px;
     height: 5px;
-    background-color: #ff4500;
+    background-color: #00c3ff;
     border-radius: 2px;
 }
