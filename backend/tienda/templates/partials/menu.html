@@ -1,0 +1,61 @@
+{% load static %}
+<header class="container-menu">
+    <div class="menu">
+        <a href="{% url 'index' %}">
+            <img src="{% static 'assets/logo.png' %}" alt="BookyFind" style="height:auto; width:130px;">
+        </a>
+        <nav>
+            <ul class="nav">
+                <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'libros' %}">Libros</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'clubes' %}">Clubes de Lectura</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'ofertas' %}">Ofertas</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">Contacto</a></li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="cuentaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Cuenta
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="cuentaDropdown">
+                        {% if request.user.is_authenticated %}
+                            
+                            {% if request.user.is_staff %}
+                                <li><a class="dropdown-item" href="{% url 'admin_panel' %}">Panel Admin</a></li>
+                            {% else %}
+                                <li><a class="dropdown-item" href="{% url 'cuenta' %}">Mi Cuenta</a></li>
+                            {% endif %}
+                            <li>
+                                <form method="POST" action="{% url 'logout' %}" style="display: inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="dropdown-item" style="background: none; border: none; padding: 0; margin: 0; cursor: pointer;">
+                                        Cerrar Sesión
+                                    </button>
+                                    </form>
+                            </li>
+                        {% else %}
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Iniciar Sesión</a></li>
+                            <li><a class="dropdown-item" href="{% url 'registro' %}">Registrarse</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="container-buscador">
+            <input class="buscador" type="text" placeholder="Buscar en la tienda...">
+            <button class="btn btn-primary">🔍</button>
+        </div>
+
+        <div class="container-carrito">
+            <a href="{% url 'carrito' %}" class="btn btn-outline-primary carrito-btn position-relative">
+                <i class="bi bi-basket-fill"></i>
+                <span class="carrito-contador position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{ total_items_carrito|default:"0" }}
+                </span>
+            </a>
+        </div>
+    </div>
+</header>
+
+
+
