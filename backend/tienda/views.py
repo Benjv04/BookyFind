@@ -3,7 +3,16 @@ from transbank.webpay.webpay_plus.transaction import Transaction
 from django.http import HttpResponse
 from django.urls import reverse
 import uuid
-from .models import Libro
+from .models import Libro, Usuario
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
+from django.views.decorators.http import require_POST
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib import messages
+from .forms import UsuarioCreationForm, ProductoForm
+from django import forms
+
 
 
 # Instanciar una vez
@@ -179,3 +188,117 @@ def index(request):
     libros_destacados = Libro.objects.all()[:4]
     return render(request, 'index.html', {'libros_destacados': libros_destacados})
 
+
+#TODO LO DE CREAR EL LOGIN
+
+def registro_usuario(request):
+    if request.method == 'POST':
+        form = UsuarioCreationForm(request.POST)
+        if form.is_valid():
+            usuario = form.save()
+            messages.success(request, "Tu cuenta ha sido creada correctamente. Ya puedes iniciar sesión.")
+            return redirect('login')
+        else:
+            messages.error(request, "Por favor corrige los errores del formulario.")
+    else:
+        form = UsuarioCreationForm()
+    return render(request, 'cuenta/registro.html', {'form': form})
+
+
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def admin_panel(request):
+    if not request.user.is_staff:
+        return redirect('cuenta')
+
+    libros = Libro.objects.all()
+    usuarios = Usuario.objects.filter(is_staff=False)  # Mostrar solo usuarios no administradores
+
+    return render(request, 'cuenta/admin_panel.html', {
+        'libros': libros,
+        'usuarios': usuarios
+    })
+
+
+
+@require_POST
+def logout_view(request):
+    logout(request)
+    return redirect('index')
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, f"Bienvenido, {user.username}.")
+
+            # Redirige según si es staff o no
+            if user.is_staff:
+                return redirect('admin_panel')
+            else:
+                return redirect('cuenta')
+        else:
+            messages.error(request, "Credenciales inválidas.")
+    else:
+        form = AuthenticationForm()
+    return render(request, 'cuenta/login.html', {'form': form})
+
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def admin_productos(request):
+    libros = Libro.objects.all()
+    return render(request, 'cuenta/admin_productos.html', {'libros': libros})
+
+class LibroForm(forms.ModelForm):
+    class Meta:
+        model = Libro
+        fields = ['titulo', 'descripcion', 'precio', 'precio_oferta', 'oferta', 'stock', 'imagen']
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def editar_producto(request, libro_id):
+    libro = get_object_or_404(Libro, id=libro_id)
+
+    if request.method == 'POST':
+        form = ProductoForm(request.POST, request.FILES, instance=libro)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Producto actualizado correctamente.')
+            return redirect('admin_panel')
+        else:
+            messages.error(request, 'Corrige los errores del formulario.')
+    else:
+        form = ProductoForm(instance=libro)
+
+    return render(request, 'cuenta/editar_producto.html', {'form': form, 'libro': libro})
+
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def admin_usuarios(request):
+    Usuario = get_user_model()  # Asegura que estás usando el modelo personalizado
+    usuarios = Usuario.objects.all()  # Sin filtro
+    return render(request, 'cuenta/admin_usuarios.html', {'usuarios': usuarios})
+
+@login_required
+def cuenta_view(request):
+    return render(request, 'cuenta/cuenta.html')
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+@require_POST
+def eliminar_usuario(request, usuario_id):
+    Usuario = get_user_model()
+    usuario = get_object_or_404(Usuario, id=usuario_id)
+
+    if usuario.is_staff:
+        messages.error(request, "No puedes eliminar a otro administrador.")
+    else:
+        usuario.delete()
+        messages.success(request, "Usuario eliminado correctamente.")
+
+    return redirect('admin_panel')

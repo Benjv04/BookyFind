@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,6 +29,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+
+# MENSAJES
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 # Application definition
 
@@ -49,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'bookyfind.urls'
@@ -62,6 +67,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.debug',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'tienda.context_processors.total_items_carrito',
@@ -141,3 +147,11 @@ from transbank.webpay.webpay_plus.transaction import Transaction
 commerce_code = "597055555532"  # Código de comercio de prueba
 api_key = "597055555532"  # También en pruebas, el mismo
 integration_type = "TEST"
+
+#PARA EL LOGIN
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'cuenta'
+
+# Redirección después de login/logout
+LOGIN_REDIRECT_URL = 'cuenta'       # nombre de la URL a la que redirige después de iniciar sesión
+LOGOUT_REDIRECT_URL = 'index'       # después de cerrar sesión

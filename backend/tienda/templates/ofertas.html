@@ -16,46 +16,15 @@
 </head>
 <body>
 
-<header class="container-menu">
-    <div class="menu">
-        <input type="checkbox" id="menu-toggle" class="menu-toggle">
-        <label for="menu-toggle" class="menu-hamburguesa">
-            <i class="bi bi-list"></i>
-        </label>
-        
-         <a href="{% url 'index' %}">
-                <img src="{% static 'assets/logo.png' %}" alt="BookyFind" style="height:auto; width:130px;">
-            </a>        
-        <div class="menu-contenido">
-            <nav>
-                <ul class="nav">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'libros' %}">Libros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'clubes' %}">Clubes de Lectura</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'ofertas' %}">Ofertas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">Contacto</a></li>
-                </ul>
-            </nav>
-            <div class="container-buscador">
-                <input class="buscador" type="text" placeholder="Buscar en la tienda...">
-                <button class="btn btn-primary">🔍</button>
-            </div>
-            <div class="container-carrito">
-                <a href="{% url 'carrito' %}" class="btn btn-outline-primary carrito-btn position-relative">
-                    <i class="bi bi-basket-fill"></i>
-                    <span class="carrito-contador position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {{ total_items_carrito }}
-                    </span>
-                </a>
-            </div>
-        </div>
-    </div>
-</header>
+ {% include 'partials/menu.html' %}
 
 <!-- Sección de Ofertas -->
 <div class="container mt-5">
-    <h2 class="titulo text-center"><strong>Libros en Oferta</strong></h2>
-    <br>
+    <div class="text-center mb-4">
+    <div class="titulo-subrayado-wrapper">
+        <h2 class="titulo-subrayado"><strong>Libros en Oferta</strong></h2>
+    </div>
+    </div>
     <div class="row">
         {% for libro in libros_en_oferta %}
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">

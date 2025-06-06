@@ -1,27 +1,20 @@
-/* MENU TOGGLE */
-.menu-toggle {
-    display: none;
-    position: absolute;
-    opacity: 0;
-    left: -9999px;
+:root {
+    --color-primario: #007bff;
+    --color-secundario: #00c3ff;
+    --color-fondo: #f5f7fa;
+    --color-texto: #333;
 }
 
-/* MENU PRINCIPAL */
+/* =======================
+   NAVBAR / MENÚ PRINCIPAL
+========================== */
 .container-menu {
-    background-color: #ffffff;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
     padding: 15px 0;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.menu-hamburguesa {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #333;
-    padding: 10px;
-    z-index: 1001; /* Asegura que esté por encima del contenido */
 }
 
 .menu {
@@ -39,15 +32,27 @@
     align-items: center;
 }
 
-/* TITULO */
-.titulo-tienda {
+.menu-hamburguesa {
+    display: none;
+    background: none;
+    border: none;
     font-size: 24px;
-    font-weight: bold;
+    cursor: pointer;
     color: #333;
-    margin: 0;
+    padding: 10px;
+    z-index: 1001;
 }
 
-/* NAVEGACION */
+.menu-toggle {
+    display: none;
+    position: absolute;
+    opacity: 0;
+    left: -9999px;
+}
+
+/* =======================
+   LINKS NAVEGACIÓN
+========================== */
 .nav {
     display: flex;
     list-style: none;
@@ -61,17 +66,19 @@
 
 .nav-link {
     text-decoration: none;
-    color: #333;
+    color: var(--color-texto);
     font-size: 16px;
-    transition: color 0.3s;
-    display: inline-block; /* Añadido para mejor control */
+    transition: all 0.3s;
 }
 
 .nav-link:hover {
-    color: #007bff;
+    color: var(--color-primario) !important;
+    font-weight: bold;
 }
 
-/* BUSCADOR */
+/* =======================
+   BUSCADOR
+========================== */
 .container-buscador {
     display: flex;
     align-items: center;
@@ -84,21 +91,23 @@
     outline: none;
 }
 
-.btn {
+.container-buscador .btn {
     margin-left: 5px;
-    background-color: white;
+    background-color: var(--color-primario) !important;
+    color: white !important;
     border: none;
-    padding: 5px 10px;
-    cursor: pointer;
+    padding: 6px 12px;
     border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
-.btn:hover {
-    background-color: #0056b3;
-    color: white;
+.container-buscador .btn:hover {
+    background-color: #0056b3 !important;
 }
 
-/* CARRITO */
+/* =======================
+   CARRITO
+========================== */
 .container-carrito {
     margin-left: 15px;
 }
@@ -107,17 +116,18 @@
     position: relative;
     padding: 8px 12px;
     border-radius: 50%;
-    color: #007bff;
-    border: 1px solid #007bff;
+    color: var(--color-primario);
+    border: 1px solid var(--color-primario);
     background-color: white;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s;
 }
 
 .carrito-btn:hover {
-    background-color: #007bff;
+    background-color: var(--color-primario);
     color: white;
 }
 
@@ -125,7 +135,7 @@
     position: absolute;
     top: -5px;
     right: -5px;
-    background-color: #ff6b6b;
+    background-color: var(--color-secundario);
     color: white;
     border-radius: 50%;
     width: 20px;
@@ -136,26 +146,18 @@
     font-size: 12px;
 }
 
-
-/* PARA K SEA RESPONSIVO*/
-
+/* =======================
+   RESPONSIVO
+========================== */
 @media (max-width: 992px) {
     .menu-hamburguesa {
         display: block;
         order: 1;
     }
-    
-    .titulo-tienda {
-        order: 2;
-        margin: 0 auto;
-        padding: 0 20px;
-        text-align: center;
-        flex-grow: 1;
-    }
-    
+
     .menu-contenido {
-        position: fixed; /* Cambiado de absolute a fixed */
-        top: 70px; /* Ajusta según la altura de tu header */
+        position: fixed;
+        top: 70px;
         left: 0;
         width: 100%;
         background-color: #ffffff;
@@ -170,72 +172,133 @@
         opacity: 0;
         visibility: hidden;
     }
-    
+
     .menu-toggle:checked ~ .menu-contenido {
-        max-height: calc(100vh - 70px); /* Ajusta según la altura de tu header */
+        max-height: calc(100vh - 70px);
         opacity: 1;
         visibility: visible;
     }
-    
+
     .nav {
         flex-direction: column;
         width: 100%;
         margin-bottom: 20px;
         text-align: center;
     }
-    
+
     .nav-item {
         margin: 0 0 15px 0;
         width: 100%;
     }
-    
+
     .nav-link {
         width: 100%;
         padding: 10px 0;
         display: block;
     }
-    
+
     .container-buscador {
         width: 100%;
         max-width: 300px;
         margin: 0 auto 20px;
     }
-    
+
     .container-carrito {
         width: 100%;
         margin: 0;
         text-align: center;
     }
-    
+
     .carrito-btn {
         border-radius: 4px;
         padding: 8px 15px;
     }
 }
 
-
+/* =======================
+   CARRUSEL / BANNER
+========================== */
 .carousel-item img {
-    
     object-fit: cover;
 }
 
-.carousel-item .row {
-    min-height: 100%;
-    align-items: center; /* Asegura que los elementos estén centrados verticalmente */
-}
-
 .carousel-inner {
-    width: 80%; /* Define un ancho del 80% */
-    max-width: 1200px; /* Establece un máximo de 1200px de ancho */
-    margin: 0 auto; /* Centra el contenedor */
-    padding: 20px; /* Agrega algo de espacio alrededor */
-    position: relative;
-    z-index: 1;
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
     text-align: center;
 }
 
-/* css new york time api */
+/* =======================
+   TARJETAS DE LIBROS
+========================== */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+.card:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15) !important;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: contain;
+    width: 50%;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+}
+
+.btn-outline-success {
+    border-color: var(--color-secundario);
+    color: var(--color-secundario);
+}
+
+.btn-outline-success:hover {
+    background-color: var(--color-secundario);
+    color: white;
+}
+
+/* =======================
+   TÍTULOS SUBRAYADOS
+========================== */
+.titulo-subrayado {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.titulo-subrayado::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50vw;
+    height: 1px;
+    background-color: #00c3ff;
+    opacity: 0.5;
+}
+
+.titulo-subrayado::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 5px;
+    background-color: #00c3ff;
+    border-radius: 2px;
+}
+
+/* =======================
+   NYT API LIBROS
+========================== */
 #nyt-books .card {
     max-width: 300px;
     margin: 0 auto;
@@ -267,15 +330,4 @@
 #nyt-books .card-text {
     font-size: 0.9rem;
     color: #555;
-}
-
-
-/*tamaño de imagen libro*/
-.card-img-top {
-    height: 200px;
-    object-fit: contain;
-    width: 50%;
-    border-radius: 5px;
-    display: block;
-    margin: 0 auto;
 }
