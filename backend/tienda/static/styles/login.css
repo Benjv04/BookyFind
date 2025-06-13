@@ -1,0 +1,145 @@
+:root {
+    --color-primario: #007bff;
+    --color-secundario: #00c3ff;
+    --color-fondo: #f5f7fa;
+    --color-texto: #333;
+}
+
+/* ==========================
+   NAVBAR
+========================== */
+.container-menu {
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 15px 0;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.menu-contenido {
+    display: flex;
+    align-items: center;
+}
+
+.menu-hamburguesa {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 10px;
+    color: #333;
+    z-index: 1001;
+}
+
+.menu-toggle {
+    display: none;
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+}
+
+/* ==========================
+   NAV LINKS
+========================== */
+.nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    margin-right: 15px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--color-texto);
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--color-primario);
+    font-weight: bold;
+}
+
+/* ==========================
+   BUSCADOR
+========================== */
+.container-buscador {
+    display: flex;
+    align-items: center;
+}
+
+.buscador {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+.container-buscador .btn {
+    margin-left: 5px;
+    background-color: var(--color-primario);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.container-buscador .btn:hover {
+    background-color: #0056b3;
+}
+
+/* =======================
+   LOGIN PAGE
+========================== */
+.login-container {
+    min-height: 80vh;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.login-container .card {
+    border-radius: 12px;
+    border: none;
+    background-color: #ffffff;
+}
+
+.login-container .card h2 {
+    font-weight: bold;
+}
+
+.login-container form p {
+    margin-bottom: 15px;
+}
+
+.login-container .form-control {
+    border-radius: 8px;
+    box-shadow: none;
+    border: 1px solid #ccc;
+}
+
+.login-container .btn-primary {
+    border-radius: 8px;
+    background-color: var(--color-primario);
+    border: none;
+    padding: 10px;
+}
+
+.login-container .btn-primary:hover {
+    background-color: #0056b3;
+}
