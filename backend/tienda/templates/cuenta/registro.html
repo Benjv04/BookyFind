@@ -5,28 +5,48 @@
     <meta charset="UTF-8">
     <title>Registrarse - BookyFind</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'styles/index.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/registro.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
-<body class="d-flex flex-column min-vh-100">
-
-    <!-- Menú centrado -->
+<body>
     {% include 'partials/menu.html' %}
 
-    <!-- Contenedor centrado para formulario -->
-    <div class="container mt-5 d-flex justify-content-center">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <h2 class="text-center">Registrarse</h2>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" class="btn btn-primary w-100">Ingresar</button>
-                </form>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
             </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="container d-flex justify-content-center align-items-center registro-container">
+        <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
+            <h2 class="text-center mb-4 text-primary">Crear Cuenta</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_username" class="form-label">Nombre de usuario</label>
+                    <input type="text" name="username" class="form-control" id="id_username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="id_email" class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" id="id_email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="id_password1" class="form-label">Contraseña</label>
+                    <input type="password" name="password1" class="form-control" id="id_password1" required>
+                </div>
+                <div class="mb-3">
+                    <label for="id_password2" class="form-label">Confirmar contraseña</label>
+                    <input type="password" name="password2" class="form-control" id="id_password2" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                </div>
+            </form>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

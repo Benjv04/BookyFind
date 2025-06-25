@@ -86,6 +86,11 @@ def pago_exito(request):
         response = transaction.commit(token)
         # Verifica si fue aprobado
         if response['status'] == 'AUTHORIZED' or response['response_code'] == 0:
+            # ✅ Vaciar carrito
+            if 'carrito' in request.session:
+                del request.session['carrito']
+                request.session.modified = True
+
             return render(request, 'pago_exito.html', {'respuesta': response})
         else:
             return redirect('pago_error')
