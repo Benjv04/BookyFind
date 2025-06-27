@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados de Búsqueda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}">
+</head>
+<body>
+
+    {% include 'partials/menu.html' %}
+
+    <div class="container mt-4">
+        <h3>Resultados para: "{{ query }}"</h3>
+        <div class="row">
+            {% for libro in resultados %}
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalLibro{{ libro.id }}">
+                            <img src="{{ libro.imagen.url }}" class="card-img-top" alt="{{ libro.titulo }}">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ libro.titulo }}</h5>
+                            <p class="card-text">${{ libro.precio }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modalLibro{{ libro.id }}" tabindex="-1" aria-labelledby="modalLabel{{ libro.id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel{{ libro.id }}">{{ libro.titulo }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            </div>
+                            <div class="modal-body d-flex">
+                                <img src="{{ libro.imagen.url }}" class="img-fluid me-3" style="max-width: 250px;" alt="{{ libro.titulo }}">
+                                <div class="d-flex flex-column">
+                                    <p><strong>Autor:</strong> {{ libro.autor }}</p>
+                                    <p><strong>Editorial:</strong> {{ libro.editorial }}</p>
+                                    <p><strong>Publicado:</strong> {{ libro.publicacion }}</p>
+                                    <p><strong>Descripción:</strong> {{ libro.descripcion }}</p>
+                                    <p><strong>Precio:</strong> ${{ libro.precio }}</p>
+
+                                    <form method="POST" action="{% url 'agregar_al_carrito' libro.id %}" class="mt-auto">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-sm btn-outline-success w-100">Agregar al carrito</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-muted">No se encontraron resultados para tu búsqueda.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
