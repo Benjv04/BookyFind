@@ -52,6 +52,7 @@
                         <img src="{{ libro.imagen.url }}" class="card-img-top img-fluid" alt="{{ libro.titulo }}">
                     {% else %}
                         <img src="{% static 'assets/default_book.jpg' %}" class="card-img-top img-fluid" alt="Sin imagen">
+                        
                     {% endif %}
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">{{ libro.titulo }}</h5>

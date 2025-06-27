@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .views import carrito_view
 from django.contrib.auth import views as auth_views
-from .views import cuenta_view, admin_panel, registro_usuario, login_view, admin_productos, editar_producto, admin_usuarios, eliminar_usuario
+from .views import cuenta_view, admin_panel, registro_usuario, login_view, admin_productos, editar_producto, admin_usuarios, eliminar_usuario, buscar_libros
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -49,6 +49,8 @@ urlpatterns = [
     path('admin-panel/productos/<int:libro_id>/editar/', editar_producto, name='editar_producto'),
     path('admin-panel/usuarios/', admin_usuarios, name='admin_usuarios'),
     path('admin-panel/usuarios/<int:usuario_id>/eliminar/', eliminar_usuario, name='eliminar_usuario'),
+    path('buscar/', buscar_libros, name='buscar_libros'),
+
 
 ]
 
