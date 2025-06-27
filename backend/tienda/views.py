@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 from .forms import UsuarioCreationForm, ProductoForm
 from django import forms
+from django.db.models import Q
 
 
 
@@ -307,3 +308,22 @@ def eliminar_usuario(request, usuario_id):
         messages.success(request, "Usuario eliminado correctamente.")
 
     return redirect('admin_panel')
+
+
+#   Pa buscar libros
+
+def buscar_libros(request):
+    query = request.GET.get('q', '')
+    resultados = []
+
+    if query:
+        resultados = Libro.objects.filter(
+            Q(titulo__icontains=query) |
+            Q(autor__icontains=query) |
+            Q(descripcion__icontains=query)
+        )
+
+    return render(request, 'buscar_resultados.html', {
+        'query': query,
+        'resultados': resultados
+    })
